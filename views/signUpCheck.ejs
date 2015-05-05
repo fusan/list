@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>登録確認</h1>
+    <form action="/<%= no %>" method="get" accept-charset="utf-8">
+      <ul>
+        <li>会員番号：<input type="text" name="no" value="<%= no %>"></li>
+        <li>氏名：<input type="text" name="name" value="<%= name %>"></li>
+        <li>ふりがな：<input type="text" name="ruby" value="<%= ruby %>"></li>
+        <li>性別<input type="text" name="sex" value="<%= sex %>"></li>
+        <li>郵便番号<input type="text" name="postcode" value="<%= postcode %>"></li>
+        <li>住所<input type="text" name="address" value="<%= address %>"></li>
+        <li>生年月日<input type="text" name="birthday" value="<%= birthday %>"></li>
+        <li>メール<input type="text" name="eMail" value="<%= eMail %>"></li>
+        <li>電話<input type="text" name="tel" value="<%= tel %>"></li>
+      </ul>
+      問題がなければ保存してください。
+      <input type="submit" name="createNew" value="保存">
+    </form>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+      /*
+      var no = <%= no %>,
+          name = '<%= name %>',
+          tel = <%= tel %>;
+
+      //console.log(no, name, tel);
+
+      $('#createNew').on('click', function() {
+
+        var newCard = $.ajax({
+            url: '/' + no,
+            type: 'GET',
+            data: {
+              no: no,
+              name: name,
+              tel : tel
+            }
+          });
+        newCard.then(
+          function(data) {
+
+          },
+          function(err) {
+            console.log()
+          }
+        );
+
+
+      });*/
+    });
+    </script>
+  </body>
+</html>

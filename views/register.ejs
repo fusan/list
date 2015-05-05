@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+  </head>
+  <body>
+    <h1>新規登録</h1>
+    <form action="/signUpCheck" method="post" accept-charset="utf-8">
+      <ul>
+        <li>会員番号<input type="number" value="<%= nextNo %>" name="no" placeholder="101" required></li>
+        <li>氏名<input type="text" name="name" value="<%= customer.name %>" placeholder="梅木　威志" required><span class="caution"><%= nameCaution %></span></li>
+        <li>よみがな<input type="text" name="ruby" value="<%= customer.ruby %>" placeholder="うめき　たけし" required><span class="caution"></span></li>
+        <li>性別<input type="radio" name="sex" value="女性">女性<input type="radio" name="sex" value="男性" required>男性</li>
+        <li>郵便番号<input type="text" name="postcode" value="<%= customer.postcode %>" placeholder="100-0000" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','address','address');"></li>
+        <li>住所<input type="text" name="address" value="<%= customer.address %>" placeholder="東京都" size="60"></li>
+        <li>生年月日<input type="text" name="birthday" value="<%= customer.birthday %>" placeholder="2015.1.1"　value="2012.02.16"></li>
+        <li>メール<input type="mail" name="eMail" value="<%= customer.eMail %>" placeholder="test@gmail.com"></li>
+        <li>電話<input type="tel" name="tel" value="<%= customer.tel %>" placeholder="090-3456-1234"><span class="caution"><%= telCaution %></span></li>
+        <input type="submit" name="dataregistar" value="新規登録">  
+      </ul>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/index.js"></script>
+    <!-- 郵便api https://code.google.com/p/ajaxzip3/ -->
+  </body>
+</html>
