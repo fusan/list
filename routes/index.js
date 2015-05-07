@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var Promise = require('es6-promise').Promise;
-var jquery = require('jquery');
 
 var model = require('../model.js');
 	User = model.User;

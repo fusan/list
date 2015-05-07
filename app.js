@@ -56,7 +56,5 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.listen(8081);
-
 //製作開始日　4/11
 module.exports = app;
