@@ -21,23 +21,20 @@
     </span>
 
     <!-- コントロール　-->
-    <img id="control">
+    
     <div id="controlPanel">
       <ul>
         <li><span class="end"><input type="button" value="外部データ" id="inport"></span></li>
         <li><span class="end"><input type="range" min="-50" max="50" value="slider" id="slider"></span></li>
-        <li><input type="button" id="analytics" value="分析"></li>
       </ul>
     </div>
 
-    <p id="count">会員数　<%= memberCount %>　/　最終番号は　<%= lastNo %></p>
+    <p id="count">会員数　<%= memberCount %>　/　最終番号は　<%= lastNo %><img id="control"><img id="analytics"></p>
     <!-- 検索結果　-->
     <div id="searchResult"></div>
 
     <div class="head">誕生月</div>
     <div id="birthday"></div>
-    <div class="head">連絡板</div>
-    <div id="board"></div>
     <div class="head">天気</div>
     <div id="weather"></div>
 

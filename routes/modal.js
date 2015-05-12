@@ -90,15 +90,35 @@ exports.modify = function (req) {
 		html += '<input type="submit" name="update" id="update" value="&not;">';
 		html += '<input type="reset" name="cancel" id="cancel" value="&times;">';
 		html += '</form>';
+		html += '<form action="/removeLog" method="get" name="removeLog"> ';
+		html += '<span><input type="hidden" name="no" value="'+ req.query.no +'"></span><br>';
+		html += '<span><input type="hidden" name="id" value="'+ req.query.count +'"></span><br>';
+		html += '<input type="submit" name="removeLog" id="removeLog" value="re">';
+		html += '</form>';
 		//console.log(html);
 	return html;
 	//jsodomを使う予定
+}
+
+exports.removeImg = function (req) {
+	console.log(req.query);
+	var html = '<h3>カルテ削除確認</h3>';
+		html += '<form action="/removeKarte" method="get" name="karte"> ';
+		html += '<span><input type="hidden" name="no" value="'+ req.query.no +'"></span><br>';
+		html += '<span><input type="text" name="id" value="'+ req.query.id +'"></span><br>';
+		html += '<input type="submit" name="remove" id="remove" value="&not;">';
+		html += '<input type="reset" name="cancel" id="cancel" value="&times;">';
+		html += '</form>';
+
+	return html;
 }
 
 //データ解析フォーム
 exports.analytics = function (req) {
 	var html = '';
 		html += '<input type="button" id="visitLanking" value="来店数ランキング">';
+		//解析対象　来店頻度と年齢分布、　mongodb 
+		html += '<div id="visual"></div>'
 		html += '<span id="cancel">&times;</span>';
 	return html;
 }

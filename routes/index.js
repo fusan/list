@@ -202,6 +202,22 @@ router.get('/modifyLog', function(req, res) {
 	});
 });
 
+//削除
+router.get('/removeLog', function(req, res) {
+	console.log(req.query);
+
+	var promise = new Promise(function(resolve, reject) {
+		Log.remove({'_id': req.query.id}, function(err) {
+			if(!err) {resolve('ok');}
+		});
+	});
+
+	promise.then(function(value) {
+		//リダイレクトするとajaxのloadイベント発火、履歴をロードしなおす。
+		res.redirect(301,'/card' + req.query.no);
+	});
+});
+
 // 更新情報をajaxで取得
 router.get('/log', function(req, res) {
 	Log.find({'会員番号': req.query.no}, function(err ,data) {
@@ -214,8 +230,9 @@ router.get('/log', function(req, res) {
 				time = data[i]['時間'],
 				staff = data[i]['担当'],
 				nominee = data[i]['指名'];
+
 				date = date.getFullYear()+'.'+(date.getMonth()+1)+'.'+date.getDate()+'('+week[date.getDay()]+')';
-				html +='<div class="logList"><span style="display: none;">'+ data[i]._id +'</span><span>'+date+'</span>';
+				html +='<div class="logList"><span style="display: none;" class="logId">'+ data[i]._id +'</span><span>'+date+'</span>';
 				html +='<span>'+ menu + time + '</span><span>担当:'+staff+'</span><span>指名:'+nominee+'</span></div>';	
 		}
 		res.send(html);
@@ -229,8 +246,8 @@ router.post('/appendIMG', function(req, res) {
 
 	//画像データをデータベースに格納
 	var promise = new Promise(function(resolve, reject) {
-		update.IMG(req);
-		resolve('ok');//ただのトリガー
+		update.IMG(req);  //Img modelにデータを挿入
+		resolve('ok');  //ただのトリガー
 	});
 	
 	//データベースから画像履歴を抽出
@@ -252,7 +269,7 @@ router.post('/appendIMG', function(req, res) {
 	});	
 });
 
-//カルテ画像の追加
+//カルテ画像の表示　格納後のリロード処理
 router.get('/kartes', function(req, res) {
 	//console.log(data);
 	Img.find({'会員番号': req.query.no}, function(err, data) {
@@ -269,6 +286,29 @@ router.get('/kartes', function(req, res) {
 			}
 			res.send(imgs);
 		});
+});
+
+//カルテ画像の削除フォーム
+router.get('/removeKarteForm', function(req, res) {
+	console.log(req.query);
+	var html = modal.removeImg(req);
+	res.send(html);
+})
+
+//カルテ画像削除
+router.get('/removeKarte', function(req, res) {
+
+	var promise = new Promise(function(resolve, reject) {
+		Img.remove({'_id': req.query.id}, function(err) {
+			if(err) throw err;
+			console.log('remove!: ' + req.query.id);
+			resolve('remove');
+		});
+	});
+
+	promise.then(function(value) {
+		res.redirect('/card' + req.query.no);
+	})
 });
 
 //カルテメモ
@@ -339,9 +379,84 @@ router.get('/birthday', function(req, res) {
 
 //解析ページ
 router.get('/analytics', function(req, res) {
+
+	var ranking10 = {};
+		ranking10.name = '';
+		ranking10.NumOfVisit = '';
+
+	var membersArray = [];
+	var visitCounts = [];
+	var members;
+	var memberNo = 100;
+
+	//会員数を取得　ループの回数を定義
+	//log履歴を全て取得して会員番号をqueryにして来店数を取得　var 
+	var promise = new Promise(function(resolve, reject) {
+		User.count({},function(err,count) {
+			resolve(count);//ただのトリガー
+		});
+	});
+
+	promise.then(function(value) {
+		//console.log('会員数');
+		//console.log(value);
+		members = value;
+
+		for(var i=0,n=members;i<n;i++) {
+			memberNo = memberNo + 1;
+			membersArray.push(parseInt(memberNo));
+		}
+	});
+
+	promise.then(function(value) {
+		//console.log('会員番号配列');
+		console.log('会員数' + members);
+		console.log(membersArray);
+
+		//ループの中でfindすると非同期処理に対応できない。findの中でループ処理をする。
+		for (var i=0,n=membersArray.length;i<n;i++) {
+			//console.log(membersArray[i]);
+			Log.find({"会員番号" : parseInt(membersArray[i])}, function(err, data) {
+				//var visit = {};
+				//console.log('来店履歴データ');
+				//console.log(data);
+				if(err) throw err;
+				if(data[0] === undefined || data[0] === null) {
+					console.log(data[0] + 'データがない');
+					return;
+				} else {
+					var no = data[0]['会員番号'];
+					var times = data.length;
+
+					console.log(no+':'+times);
+
+					User.update({'会員番号': no}, {$set: {"来店回数": times}}, {upsert: true}, function(err, data) {
+						//console.log(data);
+						User.find({'会員番号': no}, function(err, data) {
+							//console.log(data);
+						});
+					});
+				}
+			});
+		}
+
+		//console.log(visitCounts); 非同期のためループ処理内のLogモデルの処理が完了する前にconsoleしてします。
+	});
+
+	
+	//解析用のデータを集める　mongo.find();
+
 	var html = modal.analytics(req);
 	res.send(html);
 });
+
+router.get('/visitLanking',function(req, res) {
+	var limit = 10; //ランキング
+	User.where('来店回数').gt(1).limit(limit).exec(function(err, data) {
+		if(err) console.log(err);
+		res.send(data);
+	})
+})
 
 /*
 router.get('/updateLog', function(req,res) {

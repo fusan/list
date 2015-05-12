@@ -11,9 +11,6 @@ $(function() {
     memoLog(no);
   });
 
-  //技術開発コメント
-  explain('#writeMemo','memo.html() => prompt value => ajax => db.update => res.send => memo.html()');
-  explain('#file','fileApi  => ajax => db.save => db.find() => res.send => img.html()');
 
   //カルテ画像表示
   function karteLog(no) {
@@ -30,14 +27,47 @@ $(function() {
 
       //カルテ画像削除
       $('#kartes > img').on('click', function() {
-        console.log('clicked');
+        //console.log('clicked');
         console.log($(this).attr('alt'));
+        console.log(no);
+        karteRemove($(this).attr('alt'),no);
       });
     });
 
     kartes.fail(function(err) {
       console.log(err);
     });
+  }
+
+  //カルテ削除
+  function karteRemove(id,no) {
+    var remove = $.ajax({
+      url: '/removeKarteForm',
+      type: 'GET',
+      data: {
+        id: id,
+        no: no
+      }
+    });
+
+    remove.done(function(data) {
+      console.log(data);
+      $('#modal').fadeIn();
+      $('#modalInner').append(data);
+
+      //キャンセル
+      $('#cancel').on('click', function(e) {
+        e.preventDefault();
+        $('#modal').fadeOut();
+        $('#modalInner').children().remove();
+      });
+
+      //追記情報格納
+      $('#remove').on('click', function(e) {
+        $('#modal').fadeOut();
+        $('#modalInner').children().remove();
+      });
+    })
   }
 
   //来店履歴表示
@@ -64,28 +94,32 @@ $(function() {
       //来店履歴訂正　-> modifyKarete
       $('.logList').on({
         'mouseenter': function() {
-        $(this).css({
-            background: 'rgba(0,0,0,.16)'
-          });
+          $(this).css({ background: 'rgba(0,0,0,.16)'});
         },
         'mouseleave': function() {
-            $(this).css({
-              background: 'rgba(0,0,0,.04)'
-            });
-          },
+          $(this).css({ background: 'rgba(0,0,0,.04)'});
+        },
         'click': function() {
+          console.log($(this).find('.logId').text());
+          logModfy(this);
+        }
+      });
+    });
+  }
 
-          var modifyLog = $.ajax({
+  //来店履歴修正
+  function logModfy(selector) {
+    var modifyLog = $.ajax({
             url: '/modifyKarte',
             get: 'GET',
             data: {
               no: no,
-              count: $(this).find('span').eq(0).text()
+              count: $(selector).find('span').eq(0).text()
             }
           });
 
           modifyLog.done(function(data) {
-            //console.log(data);
+            console.log(data);
             $('#modal').fadeIn();
             $('#modalInner').append(data);
 
@@ -101,10 +135,16 @@ $(function() {
               $('#modal').fadeOut();
               $('#modalInner').children().remove();
             });
+
+            //削除
+            $('#removeLog').on('click', function() {
+              var id = $('input[name="id"]').val();
+              var no = $('input[name="no"]').val();
+              logRemove(id,no);
+              $('#modal').fadeOut();
+              $('#modalInner').children().remove();
+            })
           });
-        }
-      });
-    });
   }
 
   //メモデータのデータベース格納と再表示
@@ -157,6 +197,7 @@ $(function() {
   helps[1] = '<ul>カルテ画像の使い方<li>『＋』で新規追加</li></ul>';
   helps[2] = 'メモ帳の使い方';
   helpToolTip('.question',helps);
+
   //ヘルプ
   function helpToolTip(selector,helps) {
     $(selector).on('click', function() {
@@ -188,6 +229,10 @@ $(function() {
         }
     });
   }
+
+  //技術開発コメント
+  explain('#writeMemo','memo.html() => prompt value => ajax => db.update => res.send => memo.html()');
+  explain('#file','fileApi  => ajax => db.save => db.find() => res.send => img.html()');
 
   //説明のツールチップ
   function explain(selector, text) {

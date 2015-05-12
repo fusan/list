@@ -18,7 +18,8 @@ var UserSchema = new mongoose.Schema({
   '住所': String,
 	'電話番号': String,
   '生年月日': Date,
-  'メール': String//年齢は計算
+  'メール': String,//年齢は計算
+  '来店回数': String
   //'経路': String,
   //'初回担当': String,
   //'初回コース': String
