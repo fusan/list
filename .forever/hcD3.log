@@ -1,0 +1,630 @@
+Success connected:mongodb://fusan:nobu1230@52.68.17.158/list
+会員数　1 最後番号　101
+[0mGET / [32m200 [0m31.991 ms - 1883[0m
+[0mGET /stylesheets/style.css [36m304 [0m4.350 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m1.459 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.402 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m0.416 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m0.651 ms - -[0m
+[0mGET /allList [36m304 [0m8.674 ms - -[0m
+[0mGET /birthday [36m304 [0m2.880 ms - -[0m
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [32m200 [0m8.953 ms - 2108[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m1.491 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m1.670 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.538 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m0.719 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.470 ms - -[0m
+[0mGET /allList [36m304 [0m3.628 ms - -[0m
+[0mGET /birthday [36m304 [0m4.393 ms - -[0m
+[0mGET /kartes?no=101 [36m304 [0m3.751 ms - -[0m
+[0mGET /log?no=101 [36m304 [0m3.319 ms - -[0m
+[0mGET /memos?no=101 [36m304 [0m1.444 ms - -[0m
+会員数　1 最後番号　101
+[0mGET / [36m304 [0m2.915 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.747 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m2.914 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m2.907 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m2.727 ms - -[0m
+[0mGET /allList [36m304 [0m3.026 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m0.438 ms - -[0m
+[0mGET /birthday [36m304 [0m4.842 ms - -[0m
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [36m304 [0m5.848 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.618 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m0.505 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m2.841 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m1.656 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.647 ms - -[0m
+[0mGET /allList [36m304 [0m8.403 ms - -[0m
+[0mGET /memos?no=101 [36m304 [0m8.350 ms - -[0m
+[0mGET /birthday [36m304 [0m8.234 ms - -[0m
+[0mGET /log?no=101 [32m200 [0m7.591 ms - 0[0m
+[0mGET /kartes?no=101 [32m200 [0m7.417 ms - 0[0m
+{ no: '101' }
+[0mGET /appendKarte?no=101 [32m200 [0m1.383 ms - 600[0m
+[0mGET /updateLog?no=101&menu=B&time=90&staff=%E5%8D%83%E8%91%89&save=%C2%AC [32m200 [0m15.861 ms - 2108[0m
+update.LOG() : 来店履歴挿入完了
+[ { _id: 554c26b97f4215011699ada3,
+    '会員番号': 101,
+    'コース': 'B',
+    '時間': 90,
+    '担当': '千葉',
+    '指名': '',
+    __v: 0,
+    '来店日': Fri May 08 2015 03:00:09 GMT+0000 (UTC) } ]
+[0mGET /javascripts/index.js [36m304 [0m2.555 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m2.584 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.609 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m2.645 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m4.596 ms - -[0m
+[0mGET /allList [36m304 [0m11.032 ms - -[0m
+[0mGET /memos?no=101 [36m304 [0m10.853 ms - -[0m
+[0mGET /birthday [36m304 [0m10.744 ms - -[0m
+[0mGET /log?no=101 [32m200 [0m10.598 ms - 175[0m
+[0mGET /kartes?no=101 [36m304 [0m10.157 ms - -[0m
+会員数　1 最後番号　101
+[0mGET / [32m200 [0m2.916 ms - 1883[0m
+[0mGET /stylesheets/style.css [32m200 [0m2.888 ms - 5185[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m3.519 ms - 8105[0m
+[0mGET /javascripts/index.js [32m200 [0m3.591 ms - 10516[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m234.989 ms - 261018[0m
+会員数　1 最後番号　101
+[0mGET / [32m200 [0m2.847 ms - 1883[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.735 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m1.053 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.141 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m1.218 ms - -[0m
+会員数　1 最後番号　101
+[0mGET / [32m200 [0m3.387 ms - 1883[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.821 ms - 5185[0m
+[0mGET /javascripts/index.js [32m200 [0m2.344 ms - 10516[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m1.133 ms - 8105[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m73.021 ms - 261018[0m
+[0mGET /images/control.svg [32m200 [0m2.804 ms - 2454[0m
+[0mGET /allList [32m200 [0m3.689 ms - 341[0m
+[0mGET /birthday [32m200 [0m5.823 ms - 50[0m
+[0mGET /favicon.ico [33m404 [0m3.790 ms - 897[0m
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [32m200 [0m6.103 ms - 2108[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.724 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [32m200 [0m2.833 ms - 925[0m
+[0mGET /javascripts/card.js [32m200 [0m2.199 ms - 6540[0m
+[0mGET /javascripts/modal.js [32m200 [0m2.225 ms - 1990[0m
+[0mGET /javascripts/index.js [36m304 [0m0.419 ms - -[0m
+[0mGET /allList [36m304 [0m3.918 ms - -[0m
+[0mGET /birthday [36m304 [0m1.804 ms - -[0m
+[0mGET /kartes?no=101 [32m200 [0m2.898 ms - 0[0m
+[0mGET /log?no=101 [32m200 [0m4.025 ms - 175[0m
+[0mGET /memos?no=101 [32m200 [0m2.669 ms - 2[0m
+[0mPOST /appendIMG [32m200 [0m102.112 ms - 0[0m
+update.IMG() : カルテ画像挿入完了
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [32m200 [0m6.389 ms - 2108[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.525 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m2.088 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m2.170 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m1.208 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.374 ms - -[0m
+[0mGET /allList [36m304 [0m2.459 ms - -[0m
+[0mGET /birthday [36m304 [0m4.435 ms - -[0m
+[0mGET /log?no=101 [36m304 [0m6.002 ms - -[0m
+[0mGET /memos?no=101 [36m304 [0m4.237 ms - -[0m
+[0mGET /kartes?no=101 [32m200 [0m6.715 ms - 107402[0m
+メモに追記
+{ ok: 1,
+  nModified: 0,
+  n: 1,
+  upserted: [ { index: 0, _id: 554c7bda7104ece36119734c } ] }
+[0mGET /appendMemo?no=101&memo=%E6%95%B4%E4%BD%93%E5%B8%AB [32m200 [0m6.206 ms - 31[0m
+メモに追記
+{ ok: 1, nModified: 1, n: 1 }
+[0mGET /appendMemo?no=101&memo=%E6%95%B4%E4%BD%93%E5%B8%AB%3Cbr%3EIT%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2 [32m200 [0m3.304 ms - 52[0m
+[0mGET /register [32m200 [0m3.287 ms - 1536[0m
+女性
+[0mPOST /signUpCheck [32m200 [0m1.979 ms - 1519[0m
+102
+{ '表題': '102',
+  '会員番号': '102',
+  '氏名': '藤井　洋子',
+  'ふりがな': 'ふじい　ようこ',
+  '電話番号': '080-4593-0393',
+  '性別': '女性',
+  '郵便番号': '1500043',
+  '住所': '東京都渋谷区道玄坂',
+  '生年月日': '1969.11.22',
+  'メール': 'youko@gmail.com',
+  '更新情報': '',
+  '更新カルテ': '' }
+[ { _id: 554c7c327f4215011699ada5,
+    '会員番号': 102,
+    '氏名': '藤井　洋子',
+    'ふりがな': 'ふじい　ようこ',
+    '電話番号': '080-4593-0393',
+    '性別': '女性',
+    '郵便番号': '1500043',
+    '住所': '東京都渋谷区道玄坂',
+    '生年月日': Sat Nov 22 1969 00:00:00 GMT+0000 (UTC),
+    'メール': 'youko@gmail.com',
+    __v: 0,
+    '来店日': Fri May 08 2015 09:04:50 GMT+0000 (UTC) } ]
+[ { _id: 554c7c327f4215011699ada5,
+    '会員番号': 102,
+    '氏名': '藤井　洋子',
+    'ふりがな': 'ふじい　ようこ',
+    '電話番号': '080-4593-0393',
+    '性別': '女性',
+    '郵便番号': '1500043',
+    '住所': '東京都渋谷区道玄坂',
+    '生年月日': Sat Nov 22 1969 00:00:00 GMT+0000 (UTC),
+    'メール': 'youko@gmail.com',
+    __v: 0,
+    '来店日': Fri May 08 2015 09:04:50 GMT+0000 (UTC) } ]
+[0mGET /card102 [32m200 [0m4.700 ms - 2120[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.640 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m1.215 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m1.221 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.230 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m0.374 ms - -[0m
+[0mGET /allList [32m200 [0m5.636 ms - 693[0m
+[0mGET /birthday [36m304 [0m5.033 ms - -[0m
+[0mGET /log?no=102 [32m200 [0m7.044 ms - 0[0m
+[0mGET /memos?no=102 [32m200 [0m5.453 ms - 2[0m
+[0mGET /kartes?no=102 [32m200 [0m6.011 ms - 0[0m
+[0mGET /102?no=102&name=%E8%97%A4%E4%BA%95%E3%80%80%E6%B4%8B%E5%AD%90&ruby=%E3%81%B5%E3%81%98%E3%81%84%E3%80%80%E3%82%88%E3%81%86%E3%81%93&tel=080-4593-0393&sex=%E5%A5%B3%E6%80%A7&postcode=1500043&address=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E9%81%93%E7%8E%84%E5%9D%82&birthday=1969.11.22&eMail=youko%40gmail.com [32m- [0m- ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m5.514 ms - 1883[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.640 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m1.016 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m1.597 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.618 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m1.467 ms - -[0m
+[0mGET /allList [36m304 [0m4.518 ms - -[0m
+[0mGET /birthday [36m304 [0m4.151 ms - -[0m
+[0mGET /search?ruby=%E3%81%B5%E3%81%98%E3%81%84 [32m200 [0m7.561 ms - 693[0m
+[0mGET /search?ruby=%E3%81%AE [32m200 [0m3.119 ms - 341[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m6.868 ms - 1883[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.340 ms - 5185[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m1.563 ms - 8105[0m
+[0mGET /javascripts/index.js [32m200 [0m0.639 ms - 10516[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m155.065 ms - 261018[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m4.795 ms - 1883[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.785 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.643 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m1.658 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.968 ms - -[0m
+[0mGET /allList [32m200 [0m4.150 ms - 693[0m
+[0mGET /images/control.svg [32m200 [0m3.040 ms - 2454[0m
+[0mGET /birthday [32m200 [0m2.800 ms - 50[0m
+[ { _id: 554c7c327f4215011699ada5,
+    '会員番号': 102,
+    '氏名': '藤井　洋子',
+    'ふりがな': 'ふじい　ようこ',
+    '電話番号': '080-4593-0393',
+    '性別': '女性',
+    '郵便番号': '1500043',
+    '住所': '東京都渋谷区道玄坂',
+    '生年月日': Sat Nov 22 1969 00:00:00 GMT+0000 (UTC),
+    'メール': 'youko@gmail.com',
+    __v: 0,
+    '来店日': Fri May 08 2015 09:04:50 GMT+0000 (UTC) } ]
+[0mGET /card102 [32m200 [0m10.368 ms - 2120[0m
+[0mGET /stylesheets/style.css [36m304 [0m6.140 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m2.420 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [32m200 [0m5.867 ms - 925[0m
+[0mGET /javascripts/modal.js [32m200 [0m3.631 ms - 1990[0m
+[0mGET /javascripts/card.js [32m200 [0m0.722 ms - 6540[0m
+[0mGET /allList [36m304 [0m3.964 ms - -[0m
+[0mGET /birthday [36m304 [0m3.807 ms - -[0m
+[0mGET /log?no=102 [32m200 [0m1.668 ms - 0[0m
+[0mGET /kartes?no=102 [32m200 [0m2.239 ms - 0[0m
+[0mGET /memos?no=102 [32m200 [0m1.769 ms - 2[0m
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [32m200 [0m5.505 ms - 2108[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.026 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m0.460 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m2.096 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m1.202 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.212 ms - -[0m
+[0mGET /allList [36m304 [0m3.508 ms - -[0m
+[0mGET /birthday [36m304 [0m5.998 ms - -[0m
+[0mGET /memos?no=101 [32m200 [0m7.353 ms - 136[0m
+[0mGET /log?no=101 [32m200 [0m7.186 ms - 175[0m
+[0mGET /kartes?no=101 [32m200 [0m10.787 ms - 107402[0m
+{ no: '101', count: '554c26b97f4215011699ada3' }
+[0mGET /modifyKarte?no=101&count=554c26b97f4215011699ada3 [32m200 [0m1.832 ms - 651[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m4.417 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.764 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m0.947 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.856 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.408 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m3.116 ms - -[0m
+[0mGET /allList [36m304 [0m5.496 ms - -[0m
+[0mGET /birthday [36m304 [0m4.025 ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m3.847 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.729 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.116 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m2.146 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.509 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m1.507 ms - -[0m
+[0mGET /allList [36m304 [0m5.334 ms - -[0m
+[0mGET /birthday [36m304 [0m4.494 ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m3.729 ms - 1883[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.149 ms - 5185[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m0.837 ms - 8105[0m
+[0mGET /javascripts/index.js [32m200 [0m0.632 ms - 10516[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m129.705 ms - 261018[0m
+[0mGET /allList [32m200 [0m3.982 ms - 693[0m
+[0mGET /images/control.svg [32m200 [0m4.058 ms - 2454[0m
+[0mGET /birthday [32m200 [0m2.868 ms - 50[0m
+[0mGET /register [32m200 [0m5.091 ms - 1536[0m
+[0mGET /analytics [32m200 [0m1.137 ms - 104[0m
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [32m200 [0m5.208 ms - 2108[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.704 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [32m200 [0m0.713 ms - 925[0m
+[0mGET /javascripts/index.js [36m304 [0m0.368 ms - -[0m
+[0mGET /javascripts/card.js [32m200 [0m1.721 ms - 6540[0m
+[0mGET /javascripts/modal.js [32m200 [0m1.471 ms - 1990[0m
+[0mGET /allList [36m304 [0m3.829 ms - -[0m
+[0mGET /birthday [36m304 [0m2.401 ms - -[0m
+[0mGET /log?no=101 [32m200 [0m3.870 ms - 175[0m
+[0mGET /memos?no=101 [32m200 [0m4.403 ms - 136[0m
+[0mGET /kartes?no=101 [32m200 [0m7.738 ms - 107402[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m3.667 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.488 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.910 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.398 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m0.404 ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m3.629 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.428 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.942 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.684 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m0.347 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m2.307 ms - -[0m
+[0mGET /allList [36m304 [0m4.814 ms - -[0m
+[0mGET /birthday [36m304 [0m2.986 ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m3.256 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.583 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m1.690 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m1.401 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.009 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m1.589 ms - -[0m
+[0mGET /allList [36m304 [0m5.548 ms - -[0m
+[0mGET /birthday [36m304 [0m3.980 ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m3.976 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.245 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.774 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.629 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m0.443 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m2.333 ms - -[0m
+[0mGET /allList [36m304 [0m6.375 ms - -[0m
+[0mGET /birthday [36m304 [0m3.334 ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m5.005 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.622 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.027 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.890 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m0.793 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m1.390 ms - -[0m
+[0mGET /allList [36m304 [0m7.292 ms - -[0m
+[0mGET /birthday [36m304 [0m4.231 ms - -[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m5.033 ms - 1883[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.628 ms - 5185[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m2.897 ms - 8105[0m
+[0mGET /javascripts/index.js [32m200 [0m2.371 ms - 10516[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m66.798 ms - 261018[0m
+[0mGET /allList [32m200 [0m7.005 ms - 693[0m
+[0mGET /images/control.svg [32m200 [0m6.890 ms - 2454[0m
+[0mGET /birthday [32m200 [0m4.336 ms - 50[0m
+[0mGET /favicon.ico [33m404 [0m2.990 ms - 897[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m5.969 ms - 1883[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.873 ms - 5185[0m
+[0mGET /javascripts/index.js [32m200 [0m0.843 ms - 10516[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m1.345 ms - 8105[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m82.900 ms - 261018[0m
+[0mGET /images/control.svg [32m200 [0m6.470 ms - 2454[0m
+[0mGET /allList [32m200 [0m9.129 ms - 693[0m
+[0mGET /birthday [32m200 [0m4.773 ms - 50[0m
+[0mGET /favicon.ico [33m404 [0m2.901 ms - 897[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m7.041 ms - 1883[0m
+[0mGET /stylesheets/style.css [32m200 [0m3.141 ms - 5185[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m0.978 ms - 8105[0m
+[0mGET /javascripts/index.js [32m200 [0m1.122 ms - 10516[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m450.013 ms - 261018[0m
+[0mGET /images/control.svg [32m200 [0m4.147 ms - 2454[0m
+[0mGET /allList [32m200 [0m7.171 ms - 693[0m
+[0mGET /birthday [32m200 [0m4.242 ms - 50[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m5.438 ms - 1769[0m
+[0mGET /stylesheets/style.css [32m200 [0m2.338 ms - 5534[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m3.120 ms - 8105[0m
+[0mGET /javascripts/index.js [32m200 [0m2.939 ms - 13754[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m72.593 ms - 261018[0m
+[0mGET /images/chart.svg [32m200 [0m2.309 ms - 695[0m
+[0mGET /allList [32m200 [0m7.359 ms - 693[0m
+[0mGET /birthday [32m200 [0m8.575 ms - 50[0m
+[0mGET /images/control.svg [32m200 [0m9.355 ms - 2454[0m
+[0mGET /favicon.ico [33m404 [0m3.284 ms - 897[0m
+[0mGET /analytics [32m200 [0m1.592 ms - 104[0m
+[0mGET /visitLanking [33m404 [0m4.246 ms - 897[0m
+会員数　2 最後番号　102
+[0mGET / [32m200 [0m6.503 ms - 1769[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.435 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.821 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m1.758 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m2.132 ms - -[0m
+[0mGET /images/chart.svg [36m304 [0m5.044 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m1.536 ms - -[0m
+[0mGET /birthday [36m304 [0m6.840 ms - -[0m
+[0mGET /allList [36m304 [0m8.386 ms - -[0m
+[0mGET /analytics [36m304 [0m1.467 ms - -[0m
+[0mGET /visitLanking [33m404 [0m2.561 ms - 897[0m
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [32m200 [0m8.125 ms - 2044[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.871 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.845 ms - -[0m
+[0mGET /javascripts/modal.js [32m200 [0m4.286 ms - 1990[0m
+[0mGET /images/icon_question_alt2.svg [32m200 [0m3.856 ms - 925[0m
+[0mGET /javascripts/card.js [32m200 [0m1.377 ms - 7682[0m
+[0mGET /allList [36m304 [0m13.569 ms - -[0m
+[0mGET /birthday [36m304 [0m15.907 ms - -[0m
+[0mGET /log?no=101 [32m200 [0m15.543 ms - 175[0m
+[0mGET /memos?no=101 [32m200 [0m14.573 ms - 136[0m
+[0mGET /kartes?no=101 [32m200 [0m22.099 ms - 107402[0m
+[0mGET /removeKarteForm?id=554c7bc37f4215011699ada4&no=101 [33m404 [0m3.411 ms - 897[0m
+[0mGET /removeKarteForm?id=554c7bc37f4215011699ada4&no=101 [33m404 [0m2.571 ms - 897[0m
+{ no: '101' }
+[0mGET /appendKarte?no=101 [32m200 [0m2.498 ms - 601[0m
+[0mGET /updateLog?no=101&menu=A&time=90&staff=%E8%97%A4%E4%BA%95&save=%C2%AC [32m200 [0m11.244 ms - 2044[0m
+update.LOG() : 来店履歴挿入完了
+[ { _id: 554c26b97f4215011699ada3,
+    '会員番号': 101,
+    'コース': 'B',
+    '時間': 90,
+    '担当': '千葉',
+    '指名': '',
+    __v: 0,
+    '来店日': Fri May 08 2015 03:00:09 GMT+0000 (UTC) },
+  { _id: 5551c3a97f4215011699ada6,
+    '会員番号': 101,
+    'コース': 'A',
+    '時間': 90,
+    '担当': '藤井',
+    '指名': '',
+    __v: 0,
+    '来店日': Tue May 12 2015 09:11:05 GMT+0000 (UTC) } ]
+[0mGET /stylesheets/style.css [36m304 [0m2.227 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m2.711 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m2.441 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m0.694 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.408 ms - -[0m
+[0mGET /allList [36m304 [0m6.293 ms - -[0m
+[0mGET /birthday [36m304 [0m13.318 ms - -[0m
+[0mGET /log?no=101 [32m200 [0m12.746 ms - 351[0m
+[0mGET /kartes?no=101 [36m304 [0m12.522 ms - -[0m
+[0mGET /memos?no=101 [32m200 [0m13.416 ms - 136[0m
+{ no: '101', count: '5551c3a97f4215011699ada6' }
+[0mGET /modifyKarte?no=101&count=5551c3a97f4215011699ada6 [32m200 [0m1.894 ms - 651[0m
+[0mGET /analytics [36m304 [0m1.459 ms - -[0m
+[ { _id: 554c7c327f4215011699ada5,
+    '会員番号': 102,
+    '氏名': '藤井　洋子',
+    'ふりがな': 'ふじい　ようこ',
+    '電話番号': '080-4593-0393',
+    '性別': '女性',
+    '郵便番号': '1500043',
+    '住所': '東京都渋谷区道玄坂',
+    '生年月日': Sat Nov 22 1969 00:00:00 GMT+0000 (UTC),
+    'メール': 'youko@gmail.com',
+    __v: 0,
+    '来店日': Fri May 08 2015 09:04:50 GMT+0000 (UTC) } ]
+[0mGET /card102 [32m200 [0m9.040 ms - 2056[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.999 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m0.760 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m1.244 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m1.154 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m1.119 ms - -[0m
+[0mGET /allList [36m304 [0m13.922 ms - -[0m
+[0mGET /birthday [36m304 [0m11.564 ms - -[0m
+[0mGET /log?no=102 [32m200 [0m11.202 ms - 0[0m
+[0mGET /kartes?no=102 [32m200 [0m10.451 ms - 0[0m
+[0mGET /memos?no=102 [32m200 [0m10.067 ms - 2[0m
+{ no: '102' }
+[0mGET /appendKarte?no=102 [32m200 [0m1.722 ms - 601[0m
+[0mGET /updateLog?no=102&menu=B&time=90&staff=%E8%97%A4%E4%BA%95&save=%C2%AC [32m200 [0m10.070 ms - 2056[0m
+update.LOG() : 来店履歴挿入完了
+[ { _id: 5551c3cf7f4215011699ada7,
+    '会員番号': 102,
+    'コース': 'B',
+    '時間': 90,
+    '担当': '藤井',
+    '指名': '',
+    __v: 0,
+    '来店日': Tue May 12 2015 09:11:43 GMT+0000 (UTC) } ]
+[0mGET /stylesheets/style.css [36m304 [0m2.980 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m2.702 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m2.689 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m2.737 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m1.390 ms - -[0m
+[0mGET /allList [36m304 [0m6.658 ms - -[0m
+[0mGET /birthday [36m304 [0m9.110 ms - -[0m
+[0mGET /log?no=102 [32m200 [0m8.746 ms - 176[0m
+[0mGET /kartes?no=102 [36m304 [0m8.338 ms - -[0m
+[0mGET /memos?no=102 [36m304 [0m8.421 ms - -[0m
+{ no: '102' }
+[0mGET /appendKarte?no=102 [36m304 [0m1.751 ms - -[0m
+[0mPOST /appendIMG [32m200 [0m154.981 ms - 0[0m
+update.IMG() : カルテ画像挿入完了
+[0mGET /updateLog?no=102&menu=B&time=90&staff=%E8%97%A4%E4%BA%95&save=%C2%AC [32m200 [0m7.265 ms - 2056[0m
+update.LOG() : 来店履歴挿入完了
+[ { _id: 5551c3cf7f4215011699ada7,
+    '会員番号': 102,
+    'コース': 'B',
+    '時間': 90,
+    '担当': '藤井',
+    '指名': '',
+    __v: 0,
+    '来店日': Tue May 12 2015 09:11:43 GMT+0000 (UTC) },
+  { _id: 5551c3dc7f4215011699ada9,
+    '会員番号': 102,
+    'コース': 'B',
+    '時間': 90,
+    '担当': '藤井',
+    '指名': '',
+    __v: 0,
+    '来店日': Tue May 12 2015 09:11:56 GMT+0000 (UTC) } ]
+[0mGET /stylesheets/style.css [36m304 [0m1.428 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [36m304 [0m0.517 ms - -[0m
+[0mGET /javascripts/card.js [36m304 [0m1.164 ms - -[0m
+[0mGET /javascripts/modal.js [36m304 [0m3.550 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m3.495 ms - -[0m
+[0mGET /allList [36m304 [0m3.665 ms - -[0m
+[0mGET /birthday [36m304 [0m3.650 ms - -[0m
+[0mGET /log?no=102 [32m200 [0m4.923 ms - 352[0m
+[0mGET /memos?no=102 [36m304 [0m5.509 ms - -[0m
+[0mGET /kartes?no=102 [32m200 [0m11.366 ms - 192195[0m
+{ no: '102', count: '5551c3dc7f4215011699ada9' }
+[0mGET /modifyKarte?no=102&count=5551c3dc7f4215011699ada9 [32m200 [0m1.079 ms - 651[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m3.396 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.473 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.939 ms - -[0m
+[0mGET /javascripts/jquery.easing.js [36m304 [0m0.991 ms - -[0m
+[0mGET /javascripts/d3.v3.min.js [36m304 [0m1.047 ms - -[0m
+[0mGET /images/chart.svg [36m304 [0m0.393 ms - -[0m
+[0mGET /images/control.svg [36m304 [0m0.877 ms - -[0m
+[0mGET /allList [36m304 [0m3.531 ms - -[0m
+[0mGET /birthday [36m304 [0m3.147 ms - -[0m
+[0mGET /analytics [36m304 [0m0.824 ms - -[0m
+[0mGET /visitLanking [33m404 [0m1.898 ms - 897[0m
+[0mGET /visitLanking [33m404 [0m1.338 ms - 897[0m
+会員数　2 最後番号　102
+[0mGET / [36m304 [0m2.985 ms - -[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.055 ms - 5534[0m
+[0mGET /javascripts/jquery.easing.js [32m200 [0m2.530 ms - 8105[0m
+[0mGET /javascripts/index.js [32m200 [0m2.294 ms - 13754[0m
+[0mGET /javascripts/d3.v3.min.js [32m200 [0m92.963 ms - 261018[0m
+[0mGET /images/chart.svg [32m200 [0m1.614 ms - 695[0m
+[0mGET /images/control.svg [32m200 [0m1.818 ms - 2454[0m
+[0mGET /allList [36m304 [0m3.968 ms - -[0m
+[0mGET /birthday [36m304 [0m3.341 ms - -[0m
+[0mGET /analytics [36m304 [0m0.784 ms - -[0m
+[0mGET /visitLanking [33m404 [0m2.880 ms - 897[0m
+[0mGET /analytics [36m304 [0m0.781 ms - -[0m
+[ { _id: 554b9a806457a4d91581cbaa,
+    '会員番号': 101,
+    '氏名': '藤井　宣博',
+    'ふりがな': 'ふじい　のぶひろ',
+    '電話番号': '090-1234-0987',
+    '性別': '男性',
+    '郵便番号': '1660015',
+    '住所': '東京都杉並区成田東',
+    '生年月日': Sun May 04 1969 00:00:00 GMT+0000 (UTC),
+    'メール': '',
+    __v: 0,
+    '来店日': Thu May 07 2015 17:01:52 GMT+0000 (UTC) } ]
+[0mGET /card101 [36m304 [0m3.871 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.485 ms - -[0m
+[0mGET /javascripts/index.js [36m304 [0m0.706 ms - -[0m
+[0mGET /images/icon_question_alt2.svg [32m200 [0m2.055 ms - 925[0m
+[0mGET /javascripts/modal.js [32m200 [0m1.116 ms - 1990[0m
+[0mGET /javascripts/card.js [32m200 [0m0.712 ms - 7682[0m
+[0mGET /allList [36m304 [0m6.070 ms - -[0m
+[0mGET /log?no=101 [36m304 [0m5.891 ms - -[0m
+[0mGET /birthday [36m304 [0m7.376 ms - -[0m
+[0mGET /kartes?no=101 [36m304 [0m7.050 ms - -[0m
+[0mGET /memos?no=101 [32m200 [0m6.834 ms - 136[0m
+[0mGET /removeKarteForm?id=554c7bc37f4215011699ada4&no=101 [33m404 [0m4.962 ms - 897[0m
+[0mGET /removeKarteForm?id=554c7bc37f4215011699ada4&no=101 [33m404 [0m1.429 ms - 897[0m
+{ no: '101' }
+[0mGET /appendKarte?no=101 [36m304 [0m1.214 ms - -[0m
