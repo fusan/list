@@ -116,12 +116,15 @@ exports.removeImg = function (req) {
 //データ解析フォーム
 exports.analytics = function (req) {
 	var html = '';
-		html += '<span id="rankingIcon"></span>'
-		html += '<input type="button" id="visitLanking" value="来店数">';
-		html += '<input type="button" id="nomineeCount" value="指名数">';
-		html += '<input type="range" id="magnification" name="magnification" step="1" min="1" max="30" value="15">'
+		html += '<span id="rankingIcon"></span>';
+		html += '<ul id="analyticsTab">';
+		html += '<li id="visitLanking">来店数</li>';
+		html += '<li id="nomineeCount">指名数</li>';
+		html += '</ul>';
+		html += '<input type="range" id="magnification" name="magnification" step="1" min="1" max="30" value="15">';
 		//解析対象　来店頻度と年齢分布、　mongodb 
 		html += '<div id="visual"></div>'
 		html += '<span id="cancel">&times;</span>';
+		html += '<div id="analyticsExplain"></div>'
 	return html;
 }

@@ -193,9 +193,9 @@ $(function() {
   });
 
   var helps = [];
-  helps[0] = '<ul>来店履歴の使い方<li>『＋』で新規追加</li><li>リストを直接クリックで訂正処理</li></ul>';
-  helps[1] = '<ul>カルテ画像の使い方<li>『＋』で新規追加</li></ul>';
-  helps[2] = 'メモ帳の使い方';
+  helps[0] = '<ul>来店履歴の使い方<li>『＋』で新規追加</li><li>リストを直接クリックで訂正</li></ul>';
+  helps[1] = '<ul>カルテ画像の使い方<li>『＋』で新規追加</li><li>リストを直接クリックで削除</li></ul>';
+  helps[2] = '<ul>メモ帳の使い方<li>『＋』で新規追加</li><li>ポップアップウィンドウの&lt;br&gt;の後に追記、上書きすれば訂正</li></ul>';
   helpToolTip('.question',helps);
 
   //ヘルプ
@@ -227,46 +227,6 @@ $(function() {
             $('#help').remove();
           });
         }
-    });
-  }
-
-  //技術開発コメント
-  explain('#writeMemo','memo.html() => prompt value => ajax => db.update => res.send => memo.html()');
-  explain('#file','fileApi  => ajax => db.save => db.find() => res.send => img.html()');
-
-  //説明のツールチップ
-  function explain(selector, text) {
-    $(selector).on({
-      'mouseenter': function() {
-        this.parent = $(this).parent();
-        this.top = $(this).offset().top;
-        this.left = $(this).offset().left + $(this).width();
-        this.caution = $('<p id="caution">' + text + '</p>');
-
-        this.parent.append(this.caution);
-
-        this.caution.css({
-              position: 'absolute',
-              top: this.top - $(this).parent().height(),
-              left: this.left - $(this).width(),
-              padding: '0 .4rem',
-              background: 'white',
-              'font-size': '12px',
-              'color': 'red',
-              'box-shadow': '0 0 1px gray',
-              opacity: 0
-          }).animate({
-              top: this.top - this.parent.height() * 2,
-              opacity: 1
-          },300);
-      },
-      'mouseleave': function() {
-        this.caution.fadeOut(900);
-
-        setTimeout(function() {
-            this.caution.remove();
-        },930);
-      }
     });
   }
 

@@ -52,7 +52,7 @@ $(function() {
 	  imgURL = file.name;
 	  console.log(parseInt(size) + 'KB');
 	  
-	  if ( type !== 'image/jpeg' && size < 100) {
+	  if ( type == 'image/*' && size < 100) {
 	    alert('選択できるファイルはJPEG画像だけです。');
 	    inputFile.value = '';
 	    return;

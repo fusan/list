@@ -68,12 +68,21 @@ section {
 }
 
 #visual {
-	margin: 1rem auto 1rem 0;
+	margin: 0 auto 1rem 0;
 	padding: 0;
-	width: 90%;
+	width: 95%;
 	height: 72%;
 	box-shadow: 0 0 1px rgba(0,0,0,.16)
 }
+
+#magnification {
+	position: absolute;
+	top: 50%;
+	left: 5%;
+	display:  none;
+	-webkit-transform: rotate(-90deg);
+}
+
 .label {
 	display: inline-block;
 	width: 5rem;
@@ -102,7 +111,7 @@ section {
 	-webkit-transform: rotate(135deg);
 }
 
-#register,#searchNo,#searchName {
+#register,#searchNo {
 	margin: 0 auto;
 	padding: 0;
 	height: 2rem;
@@ -117,7 +126,7 @@ section {
 	background: rgba(243, 12, 5, 0.6);
 }
 
-#register:hover,#searchNo:hover,#searchName:hover {
+#register:hover,#searchNo:hover {
 	-webkit-transition: all .3s cubic-bezier(0.215, -0.400, 0.685, 1.530) 0;
 	-webkit-transform: scale(1.1);
 	color: rgba(243, 12, 5, 0.6);
@@ -125,10 +134,33 @@ section {
 	border: 1px solid rgba(243, 12, 5, 0.6);
 }
 
-#NoNum,#nameText {
+#searchName {
+	float: left;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	height: 1.9rem;
+	width: 1.9rem;
+	line-height: 1.9rem;
+	text-align: center;
+	border-radius: .2rem 0 0 .2rem;
+	color: white;
+	font-weight: bold;
+	text-shadow: 0 0 1px gray;
+	border: 1px solid transparent; 
+	background: rgba(243, 12, 5, 0.6);
+}
+
+#NoNum {
 	height: 1.5rem;
 	border: 1px solid rgba(243, 12, 5, 0.32);
 	border-radius: .2rem;
+}
+
+#nameText {
+	height: 1.8rem;
+	border: 1px solid rgba(243, 12, 5, 0.32);
+	border-radius: 0 .2rem .2rem 0;
 }
 
 #infomation {
@@ -149,8 +181,8 @@ section {
 .end {
 	display: inline-block;
 	margin: 0 2rem 0 0;
-	height: 1.5rem;
-	line-height: 1.5rem;
+	height: 2rem;
+	line-height: 2rem;
 	/*background: rgba(198, 75, 54, 0.69);*/
 	border-radius: 4px;
 }
@@ -336,6 +368,38 @@ section {
 	-webkit-transition: margin-top 1s ease ;
 }
 
-#visitLanking {
-	margin: 0 0 0 6rem;
+
+#analyticsTab {
+	display: block;
+	margin: 0;
+	padding: 0 0 0 4rem;
+	height: 1.51rem;
+
+}
+#analyticsTab li {
+	float: left;
+	display: inline-block;
+	list-style-type: none;
+	margin: 0 0 0 .1rem;
+	padding: 0 .5rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	font-size: .8rem;
+	text-shadow: 0 1 0 gray;
+	border-radius: .2rem .2rem 0 0;
+	background: rgba(0,0,0,.18);
+}
+#analyticsTab li:hover {
+	color: white;
+	text-shadow: 0 1 0 black;
+	background: rgba(0,0,0,.32);
+}
+
+#analyticsExplain {
+	position: relative;
+	float: right;
+	right: 5%;
+	height: 15%;
+	width: 50%;
+	box-shadow: 0 0 1px rgba(0,0,0,.48);
 }

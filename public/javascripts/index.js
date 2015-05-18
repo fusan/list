@@ -26,7 +26,7 @@ $(function() {
         $('#registerWindowInner').html(data);
 
         $('#visitLanking').on('click', visitRnaking);
-        $('#magnification').on('change', visitRnaking);
+        $('#magnification').on('change', visitRnaking);//magnification display none -> block
         $('#nomineeCount').on('click', nomineeCount);
 
         cancel();
@@ -50,6 +50,13 @@ function visitRnaking() {
       rank.count = data[i]['来店回数'];
       ranks.push(rank);
     }
+
+    $('#magnification').css({display: 'block'});
+    $('#magnification').siblings().on('click', function() {
+      $('#magnification').css({display: 'none'});
+    });
+
+    $('#analyticsExplain').html('来店の説明文');
 
     barChart('#visual',ranks);
   });
@@ -86,6 +93,8 @@ function nomineeCount() {
         }
         nomineeRanking.push(staff);
       }
+
+      $('#analyticsExplain').html('指名数の説明文');
 
       pieChart('#visual',nomineeRanking);
       //barChart('#visual',nomineeRanking);     
