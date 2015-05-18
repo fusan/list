@@ -133,11 +133,11 @@ router.get('/card:id(\\d+)', function(req, res) {
 	});	
 });
 
-// 名前検索
+// 名前検索　参考　http://stackoverflow.com/questions/3305561/how-to-query-mongodb-with-like
 router.get('/search', function(req,res) {
 	var ruby = req.query.ruby;
 	//console.log(name);
-	User.where({'ふりがな': {'$regex': ruby}}).exec(function(err, data) {//http://stackoverflow.com/questions/3305561/how-to-query-mongodb-with-like
+	User.where({'ふりがな': {'$regex': ruby}}).exec(function(err, data) {
 		res.send(data);
 	});
 });
@@ -156,7 +156,7 @@ router.get('/updateLog', function(req, res) {
 	//来店履歴をデータベースに格納
 	var promise = new Promise(function(resolve, reject) {
 		update.log(req);
-		resolve('ok');//ただのトリガー
+		resolve('ok');
 	});
 
 	//来店履歴を反映してレンダリング
@@ -181,31 +181,28 @@ router.get('/updateLog', function(req, res) {
 });
 
 
-// 来店履歴訂正フォーム生成
-router.get('/modifyKarte', function(req, res) {
+// 来店履歴訂正フォーム
+router.get('/modifyLogForm', function(req, res) {
 	var html = modal.modify(req);
 	res.send(html);
 });
 
 //来店履歴を訂正　
 router.get('/modifyLog', function(req, res) {
-	//来店履歴の挿入
-	console.log(req.query);
+	//console.log(req.query);
 	var promise = new Promise(function(resolve, reject) {
 		update.modify(req);
 		resolve('ok');
 	});
 
 	promise.then(function(value) {
-		//リダイレクトするとajaxのloadイベント発火、履歴をロードしなおす。
 		res.redirect('/card' + req.query.no);
 	});
 });
 
-//削除
+//来店履歴を削除
 router.get('/removeLog', function(req, res) {
-	console.log(req.query);
-
+	//console.log(req.query);
 	var promise = new Promise(function(resolve, reject) {
 		Log.remove({'_id': req.query.id}, function(err) {
 			if(!err) {resolve('ok');}
@@ -213,16 +210,13 @@ router.get('/removeLog', function(req, res) {
 	});
 
 	promise.then(function(value) {
-		//リダイレクトするとajaxのloadイベント発火、履歴をロードしなおす。
-		res.redirect(301,'/card' + req.query.no);
+		res.redirect('/card' + req.query.no);
 	});
 });
 
 // 更新情報をajaxで取得
 router.get('/log', function(req, res) {
 	Log.find({'会員番号': req.query.no}, function(err ,data) {
-		//console.log('来店履歴取得');
-		//console.log(data);
 		var html = '';
 		for(var i=0,n=data.length; i<n; i++) {
 			var date = data[i]['来店日'],
@@ -247,7 +241,7 @@ router.post('/appendIMG', function(req, res) {
 	//画像データをデータベースに格納
 	var promise = new Promise(function(resolve, reject) {
 		update.IMG(req);  //Img modelにデータを挿入
-		resolve('ok');  //ただのトリガー
+		resolve('ok');
 	});
 	
 	//データベースから画像履歴を抽出
@@ -296,7 +290,7 @@ router.get('/removeKarteForm', function(req, res) {
 })
 
 //カルテ画像削除
-router.get('/removeKarte', function(req, res) {
+router.get('/removeImg', function(req, res) {
 
 	var promise = new Promise(function(resolve, reject) {
 		Img.remove({'_id': req.query.id}, function(err) {
@@ -380,20 +374,15 @@ router.get('/birthday', function(req, res) {
 //解析ページ
 router.get('/analytics', function(req, res) {
 
-	var ranking10 = {};
-		ranking10.name = '';
-		ranking10.NumOfVisit = '';
-
 	var membersArray = [];
-	var visitCounts = [];
 	var members;
 	var memberNo = 100;
 
 	//会員数を取得　ループの回数を定義
-	//log履歴を全て取得して会員番号をqueryにして来店数を取得　var 
+	//log履歴を全て取得して会員番号をqueryにして来店数を取得
 	var promise = new Promise(function(resolve, reject) {
 		User.count({},function(err,count) {
-			resolve(count);//ただのトリガー
+			resolve(count);
 		});
 	});
 
@@ -439,13 +428,9 @@ router.get('/analytics', function(req, res) {
 				}
 			});
 		}
-
-		//console.log(visitCounts); 非同期のためループ処理内のLogモデルの処理が完了する前にconsoleしてします。
 	});
 
-	
 	//解析用のデータを集める　mongo.find();
-
 	var html = modal.analytics(req);
 	res.send(html);
 });
@@ -455,7 +440,14 @@ router.get('/visitLanking',function(req, res) {
 	User.where('来店回数').gt(1).limit(limit).exec(function(err, data) {
 		if(err) console.log(err);
 		res.send(data);
-	})
+	});
+});
+
+router.get('/nomineeCount', function(req,res) {
+	Log.where('指名').ne('').exec(function(err, data) {
+		if(err) console.log(err);
+		res.send(data);
+	});
 })
 
 /*

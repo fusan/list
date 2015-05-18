@@ -1,4 +1,6 @@
 $(function() {
+  //参考　重複チェック　http://lealog.hateblo.jp/entry/2012/07/07/155004
+
   //分析 
   var chart = $('#analytics').attr('src', '/images/chart.svg');
   chart.css({
@@ -6,7 +8,7 @@ $(function() {
     margin: '0 .5rem 0 0'
   })
  
-
+  //分析モーダルウィンドウ
   $('#analytics').on('click', function() {
     $('#registerWindow').animate({
             position: 'absolute',
@@ -22,55 +24,214 @@ $(function() {
     analytics.done(function(data) {
         //d3.jsでデータをオブジェクトを取得
         $('#registerWindowInner').html(data);
-        $('#visitLanking').on('click', function() {
-            console.log($(this).val());
-            var ranking = $.ajax({
-              url: '/visitLanking',
-              type: 'GET'
-            });
 
-            ranking.done(function(data) {
-
-              var ranks = [];
-              var rankNums = [];
-              var rankNames = [];
-              for(var i=0,n=data.length;i<n;i++) {
-                var rank = {};
-                rank.no = data[i]['会員番号'];
-                rank.name = data[i]['氏名'];
-                rank.visitCount = data[i]['来店回数'];
-                ranks.push(rank);
-                rankNums.push(rank.visitCount);
-                rankNames.push(rank.name);
-              }
-
-              console.log(rankNums);
-
-              //d3に渡す
-              barChart('#visual',rankNums,rankNames);
-              /*
-              var $rankList = $('#visual').append('<ul>');
-              $rankList.children().remove();
-
-              for(var i=0,n=ranks.length;i<n;i++) {
-                $rankList.append('<li>'+ranks[i].name+'</li>');
-              }*/
-              console.log(ranks);
-            })
-        });
+        $('#visitLanking').on('click', visitRnaking);
+        $('#magnification').on('change', visitRnaking);
+        $('#nomineeCount').on('click', nomineeCount);
 
         cancel();
-
     });
   });
 
-function barChart(DOM,noarr,namearr) {//DOM : jQueryObj
-  var positionArr = [];
+//来店ランキング
+function visitRnaking() {
 
+  var ranking = $.ajax({
+    url: '/visitLanking',
+    type: 'GET'
+  });
+
+  ranking.done(function(data) {
+    var ranks = [];
+    for(var i=0,n=data.length;i<n;i++) {
+      var rank = {};
+      rank.no = data[i]['会員番号'];
+      rank.name = data[i]['氏名'];
+      rank.count = data[i]['来店回数'];
+      ranks.push(rank);
+    }
+
+    barChart('#visual',ranks);
+  });
+}
+
+function nomineeCount() {
+  
+    var nomineeCount = $.ajax({
+      url: '/nomineeCount',
+      type: 'GET'
+    });
+
+    nomineeCount.done(function(data) {
+      console.log(data);
+      var nomineeAll = []; //指名リスト
+      var nominator = []; //指名者リストnominator
+      var nomineeRanking = [];　//指名者と指名数のオブジェクト配列
+
+      for(var i=0,n=data.length;i<n;i++) {
+        nomineeAll.push(data[i]['担当']);
+      }
+
+      var staffs = unique(nomineeAll);
+      console.log(staffs);
+
+      for(var i=0,n=staffs.length;i<n;i++) {
+        var staff = {};
+            staff.name = staffs[i];
+            staff.count = 0;
+        for(var j=0,n2=nomineeAll.length;j<n2;j++) {
+          if(staffs[i] == nomineeAll[j]) {
+            staff.count += 1; 
+          }
+        }
+        nomineeRanking.push(staff);
+      }
+
+      pieChart('#visual',nomineeRanking);
+      //barChart('#visual',nomineeRanking);     
+    });
+}
+
+//pie chart 
+function pieChart(DOM, obj) {
+  var graphArea = $(DOM)
+  var textPositions = [];
+  var nums = [];
+  var names = [];
+  var magnification = .7;
+  var fontSize = '.72rem';
+  
+  obj = obj.sort(function(a,b) {
+    return d3.descending(a.count, b.count);
+  })
+  console.log(obj);
+
+  graphArea.children().remove();
+
+  for(var key in obj) {
+        var num = obj[key].count;
+        var name = obj[key].name;
+        nums.push(parseInt(num));
+        names.push(name);
+      }
+  
+  console.log(nums,names);
+
+  var Pie = d3.select(DOM)
+    .append('svg')
+    .attr({
+      height: graphArea.height(),
+      width: graphArea.width(),
+    })
+    .append('g')
+    .attr({
+      transform: 'translate(' + graphArea.width()*.5 + ',' + graphArea.height()*.5 + ')'
+    })
+
+  var pie = d3.layout.pie()
+    .value(function(d) {
+      return d;
+    })
+
+  var arc = d3.svg.arc().innerRadius(50).outerRadius(100);
+  var color = d3.scale.category10();
+
+  console.log(pie(nums));
+
+  Pie.selectAll('path')
+    .data(pie(nums))
+    .enter()
+    .append('path')
+    .attr({
+      //d:arc,
+      stroke: 'white',
+      fill: function(d,i) {
+        //console.log(color(i));
+        return color(i);
+      }
+    })
+    .transition()
+    .duration(300)
+    .ease('ease')
+    .delay(function(d,i) {
+      return 300 * i;
+    })
+    .attrTween('d', function(d,i) {
+      var interpolate = d3.interpolate(
+        {startAngle: d.startAngle, endAngle: d.startAngle},
+        {startAngle: d.startAngle, endAngle: d.endAngle}
+        );
+
+      return function(t) {
+          return arc(interpolate(t));
+        }
+      })
+
+  Pie.selectAll('text')
+    .data(pie(nums))
+    .enter()
+    .append('text')
+    .attr({
+      transform: function(d) {
+        //console.log(arc.centroid(d));
+        textPositions.push(arc.centroid(d));
+        return  'translate(' + arc.centroid(d) +')';
+      },
+      'font-size': fontSize,
+      'text-anchor': 'middle',
+      fill: 'black'
+    })
+    .text(function(d) {
+      return d.value;
+    })
+
+
+    Pie.selectAll('text2')
+    .data(names)
+    .enter()
+    .append('text')
+    .attr({
+      transform: function(d,i) {
+        //console.log(textPositions[i][0] + 20 );
+        var x = textPositions[i][0] + 20;
+        var y = textPositions[i][1];
+        return  'translate(' + x +',' + y +  ')';
+      },
+      'font-size': fontSize,
+      'text-anchor': 'middle',
+      fill: 'black'
+    })
+    .text(function(d) {
+      return d;
+    })
+
+    Pie.append('text')
+      .attr({
+        fill: 'black',
+        'text-anchor': 'middle'
+      })
+      .text('total' + d3.sum(nums))//)
+}
+
+//バーチャート　D3
+function barChart(DOM,obj) {//DOM : jQueryObj
   $(DOM).children().remove();
+  var positionArr = [];
+  var nums = [];
+  var names = [];
+  var magnification = $('#magnification').val();
+
+  for(var key in obj) {
+        var num = obj[key].count;
+        var name = obj[key].name;
+        nums.push(parseInt(num));
+        names.push(name);
+      }
+      console.log(nums,names);
 
   var barHieght = $(DOM).height();
   var barWidth = 20;
+  var color = d3.scale.category10();
   
   //d3
   var Bar = d3.select(DOM)
@@ -81,7 +242,7 @@ function barChart(DOM,noarr,namearr) {//DOM : jQueryObj
               })
   //グラフ
   Bar.selectAll('rect')
-    .data(noarr)
+    .data(nums)
     .enter()
     .append('rect')
     .attr({
@@ -89,21 +250,35 @@ function barChart(DOM,noarr,namearr) {//DOM : jQueryObj
         
         return i * barWidth *1.2;
       },
+      y:barHieght,
+      width: barWidth,
+      height: 0,
+      transform: 'translate('+barWidth+',-20)'
+    })
+    .transition()
+    .duration(400)
+    .ease('bounce')
+    .attr({
+      x:function(d, i) {
+        
+        return i * barWidth *1.2;
+      },
       y: function(d,i) {
-        positionArr.push(barHieght - d * 10);
-        return barHieght - d * 10;
+        positionArr.push(barHieght - d * magnification);
+        return barHieght - d * magnification;
       },
       width: barWidth,
       height: function(d,i) {
-        return d * 10;
+        return d * magnification;
       },
-      fill: 'red',
-      transform: 'translate('+barWidth+',-20)'
+      fill: function(d,i) {
+        return color(i);
+      }
     })
 
   //名前
   Bar.selectAll('text')
-    .data(namearr)
+    .data(names)
     .enter()
     .append('text')
     .attr({
@@ -129,7 +304,7 @@ function barChart(DOM,noarr,namearr) {//DOM : jQueryObj
     })
     //来店数
     Bar.selectAll('text2')
-    .data(noarr)
+    .data(nums)
     .enter()
     .append('text')
     .attr({
@@ -152,54 +327,41 @@ function barChart(DOM,noarr,namearr) {//DOM : jQueryObj
 //新規登録
 $('#register').on('click', function() {
     $('#registerWindow').animate({
-      position: 'absolute',
-      top: 0,
-      height: $(window).height()
-  },500,'easeOutQuart');
+        position: 'absolute',
+        top: 0,
+        height: $(window).height()
+    },500,'easeOutQuart');
 
-  var register = $.ajax({
-      url: '/register',
-      type: 'GET'
-  });
+    var register = $.ajax({
+        url: '/register',
+        type: 'GET'
+    });
 
-//新規登録モーダルウィンドウ
-register.done(function(data) {
-    //ヴァリデーション
-    var regTel = /\d{2,4}-\d{2,4}-\d{4}/;
-    var regName = /[^\x01-\x7E\xA1-\xDF]/;
-    var regMail = /^[a-zA-Z0-9][a-zA-Z0-9_¥.¥-]+?@[A-Za-z0-9_¥.¥-]+$/;
-      
-    $('#registerWindowInner').html(data.html);
+  //新規登録モーダルウィンドウ
+  register.done(function(data) {
+      //ヴァリデーション
+      var regTel = /\d{2,4}-\d{2,4}-\d{4}/;
+      var regName = /[^\x01-\x7E\xA1-\xDF]/;
+      var regMail = /^[a-zA-Z0-9][a-zA-Z0-9_¥.¥-]+?@[A-Za-z0-9_¥.¥-]+$/;
+        
+      $('#registerWindowInner').html(data.html);
 
-    //バリデーション
-    validation(regName,$('input[name="name"]'),'全角でね');
-    validation(regName,$('input[name="ruby"]'),'全角でね');
-    validation(regTel,$('input[name="tel"]'),'半角で-をいれてね');
-    validation(regMail,$('input[name="eMail"]'),'正しくありません');
+      //バリデーション
+      validation(regName,$('input[name="name"]'),'全角でね');
+      validation(regName,$('input[name="ruby"]'),'全角でね');
+      validation(regTel,$('input[name="tel"]'),'半角で-をいれてね');
+      validation(regMail,$('input[name="eMail"]'),'正しくありません');
 
-    signUpCheck(); //確認画面へ
-    cancel(); //キャンセル
+      signUpCheck(); //確認画面へ
+      cancel(); //キャンセル
 
-    //郵便番号入力アシストAOI
-    $('input[name="postcode"]').on('keyup', function() {
-      AjaxZip3.zip2addr(this,'','address','address');
-  });
-});   
+      //郵便番号入力アシストAOI
+      $('input[name="postcode"]').on('keyup', function() {
+        AjaxZip3.zip2addr(this,'','address','address');
+    });
+  });   
 		//window.open('/register');
 });
-
-//ヴァリデーション
-function validation(reg,input,cautionText) {
-    input.on('keyup', function() {
-      if(reg.test(input.val())) {
-        $(this).next().text('OK!');　//入力値をリアルで反映するならinput.val()
-        //console.log('true');
-      } else {
-        $(this).next().text(cautionText);
-        //console.log(cautionText);
-      }
-    });
-  }
 
 //登録確認画面
 function signUpCheck() {
@@ -388,13 +550,13 @@ function signUpCheck() {
 	});
 
 	//名前検索
-	$('#searchName').on('click', function() {　//#nameText => change event 
+	$('#nameText').on('keyup', function() {　//#nameText => change event 
 		var ruby = document.getElementById('nameText').value;
 		console.log('会員名でサーチ: ' + ruby);
 
-		if(ruby == '') {
-			alert('入力してください。');
-		} else {
+		//if(ruby == '') {
+		//	alert('入力してください。');
+		//} else {
 			var search = $.ajax({
 				url: '/search',
 				type: 'GET',
@@ -410,7 +572,7 @@ function signUpCheck() {
 			search.fail(function(err) {
 				console.log(err);
 			});
-		}
+		//}
 	});
 
 	/*外部データ読み込み
@@ -443,14 +605,14 @@ function signUpCheck() {
         'mouseenter': function() {
           this.self = $(this);
             this.self.css({
-              background: 'rgba(0,0,0,.16)',
+              background: 'rgba(215, 223, 203, 0.24)',
               'box-shadow': 'black'
             });
         },
         'mouseleave': function() {
             //console.log('leave');
             this.self.css({
-                background: 'rgba(0,0,0,.04)'
+                background: 'rgba(215, 223, 203, 0.17)'
             });
         },
         'click': function() {
@@ -503,7 +665,42 @@ function signUpCheck() {
     });   
   }
 
-  //全角数字を半角文字に変換
+//ヴァリデーション
+function validation(reg,input,cautionText) {
+    input.on('keyup', function() {
+      if(reg.test(input.val())) {
+        $(this).next().text('OK!');　//入力値をリアルで反映するならinput.val()
+        //console.log('true');
+      } else {
+        $(this).next().text(cautionText);
+        //console.log(cautionText);
+      }
+    });
+  }
+
+//オブジェクトのソート
+function sort(arr,key) {//obj: 対象オブジェクト配列, count: ソートプロパティ
+  arr.sort(function(a, b) {
+        return (a.key > b.key) ? -1 : 1;
+    });
+}
+
+//重複削除
+function unique(array) {
+　var storage = {};
+　var uniqueArray = [];
+　var i,value;
+　for ( i=0; i<array.length; i++) {
+   　value = array[i];
+      if (!(value in storage)) {
+      　storage[value] = true;
+         uniqueArray.push(value);
+       }
+   }
+   return uniqueArray;
+}
+
+//全角数字を半角文字に変換
   function toInt(str) {
         str = str.replace(/[０-９．]/g, function (s) {
                     return String.fromCharCode(s.charCodeAt(0) - 65248);

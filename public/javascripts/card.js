@@ -110,7 +110,7 @@ $(function() {
   //来店履歴修正
   function logModfy(selector) {
     var modifyLog = $.ajax({
-            url: '/modifyKarte',
+            url: '/modifyLogForm',
             get: 'GET',
             data: {
               no: no,

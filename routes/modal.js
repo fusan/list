@@ -103,7 +103,7 @@ exports.modify = function (req) {
 exports.removeImg = function (req) {
 	console.log(req.query);
 	var html = '<h3>カルテ削除確認</h3>';
-		html += '<form action="/removeKarte" method="get" name="karte"> ';
+		html += '<form action="/removeImg" method="get" name="karte"> ';
 		html += '<span><input type="hidden" name="no" value="'+ req.query.no +'"></span><br>';
 		html += '<span><input type="text" name="id" value="'+ req.query.id +'"></span><br>';
 		html += '<input type="submit" name="remove" id="remove" value="&not;">';
@@ -116,7 +116,10 @@ exports.removeImg = function (req) {
 //データ解析フォーム
 exports.analytics = function (req) {
 	var html = '';
-		html += '<input type="button" id="visitLanking" value="来店数ランキング">';
+		html += '<span id="rankingIcon"></span>'
+		html += '<input type="button" id="visitLanking" value="来店数">';
+		html += '<input type="button" id="nomineeCount" value="指名数">';
+		html += '<input type="range" id="magnification" name="magnification" step="1" min="1" max="30" value="15">'
 		//解析対象　来店頻度と年齢分布、　mongodb 
 		html += '<div id="visual"></div>'
 		html += '<span id="cancel">&times;</span>';

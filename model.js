@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var url = 'mongodb://localhost/list';//mongodb://dbuser:dbpass@52.68.17.158/list
+var url = 'mongodb://localhost/list';//mongodb://dbuser:dbpass@52.68.62.98/list
 var db = mongoose.createConnection(url, function(err, res) {
 	if(err) {
 		console.log('error connected:' + url + '-' + err);

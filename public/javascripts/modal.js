@@ -1,5 +1,7 @@
 //カルテ追記
 $(function() {
+	//参考　Fielapi 参考http://www.hcn.zaq.ne.jp/___/WEB/File_API-ja.html, https://app.codegrid.net/entry/file-api-filereader-api
+	var inputFile = document.getElementById('file');
 	console.log('引き渡しデータ' + no);
 
 	//来店履歴追記
@@ -37,8 +39,7 @@ $(function() {
 		});
 	});
 
-	//画像取り込み >> fielapi 参考http://www.hcn.zaq.ne.jp/___/WEB/File_API-ja.html, https://app.codegrid.net/entry/file-api-filereader-api
-	var inputFile = document.getElementById('file');
+	//画像取り込み 
 	var reader = new FileReader();
 	var imgURL;
 	 
