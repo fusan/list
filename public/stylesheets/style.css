@@ -45,7 +45,7 @@ section {
 	left: 0;
 	height: 0;
 	width: 100%;
-	background: rgba(217, 219, 194, 0.18);
+	background: rgba(32, 3, 4, 0.87);
 }
 
 #registerWindowInner {
@@ -243,7 +243,7 @@ section {
 }
 
 .list,.logList {
-	background: rgba(0,0,0,.04);
+	background: rgba(215, 223, 203, 0.17);
 	width: 100%;
 	height: 1.4rem;
 	line-height: 1.4rem;
@@ -316,4 +316,26 @@ section {
 	height: 52%;
 	background: white;
 	box-shadow: 0 0 1px black;
+}
+
+#rankingIcon {
+	position: absolute;
+	top: 12%;
+	margin: 0;
+	padding: 0;
+	width: 56px;
+	height: 56px;
+	background: url('/images/icon_ribbon_alt.svg'),red;
+	background-repeat: no-repeat;
+	background-position: 12px 12px;
+	border-radius: 56px;
+	border: 2px solid rgb(255,255,255);
+	box-shadow: 0 0 2px rgba(0,0,0.32);
+	line-height: 56px;
+	text-align: center;
+	-webkit-transition: margin-top 1s ease ;
+}
+
+#visitLanking {
+	margin: 0 0 0 6rem;
 }
