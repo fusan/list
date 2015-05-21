@@ -15,13 +15,6 @@ h1 {
 	margin: 0 0 1rem 0;
 	text-shadow: 1px 1px 1px gray;
 }
-.headline {
-	display: inline-block;
-	margin: 8px 0;
-	font-size: 1.2rem;
-	font-weight: bold;
-	color: rgb(145, 170, 100);
-}
 
 a {
   color: #00B7FF;
@@ -32,6 +25,15 @@ section {
 	box-shadow: 0 0 1px rgba(0,0,0,.52);
 	border-left: 1px solid rgb(121, 232, 54);
 }
+
+.headline {
+	display: inline-block;
+	margin: 8px 0;
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: rgb(145, 170, 100);
+}
+
 #count {
 	margin: 2rem auto .5rem 0;
 	color: gray;
@@ -158,7 +160,7 @@ section {
 }
 
 #nameText {
-	height: 1.8rem;
+	height: 1.7rem;
 	border: 1px solid rgba(243, 12, 5, 0.32);
 	border-radius: 0 .2rem .2rem 0;
 }
@@ -385,14 +387,17 @@ section {
 	height: 1.5rem;
 	line-height: 1.5rem;
 	font-size: .8rem;
-	text-shadow: 0 1 0 gray;
+	text-shadow: 0 1px 0 white;
 	border-radius: .2rem .2rem 0 0;
 	background: rgba(0,0,0,.18);
+	box-shadow: 0 0 2px white inset;
+	-webkit-transition:all .5s ease 0;
 }
 #analyticsTab li:hover {
 	color: white;
-	text-shadow: 0 1 0 black;
+	text-shadow: 0 1px 0 black;
 	background: rgba(0,0,0,.32);
+	box-shadow: 0 0 1px black inset;
 }
 
 #analyticsExplain {

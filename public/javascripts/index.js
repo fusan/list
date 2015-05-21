@@ -145,7 +145,7 @@ function pieChart(DOM, obj) {
   var arc = d3.svg.arc().innerRadius(50).outerRadius(100);
   var color = d3.scale.category10();
 
-  console.log(pie(nums));
+  //console.log(pie(nums));
 
   Pie.selectAll('path')
     .data(pie(nums))
@@ -604,8 +604,11 @@ function signUpCheck() {
 	function memberList(data,target) {
 		var list = '';
     for(var i=0,n=data.length; i<n; i++) {
-      var name = data[i]['氏名'], tel = data[i]['電話番号'], no = data[i]['会員番号'], sex = data[i]['性別'];
-      list += '<div class="list"><span>'+no+'</span><span>'+ sex + '</span><span>'+name+'</span><span>TEL:'+tel+'</span></div>'
+      var name = data[i]['氏名'], ruby = data[i]['ふりがな'], tel = data[i]['電話番号'], no = data[i]['会員番号'], sex = data[i]['性別'];
+      list += '<div class="list">';
+      list += '<span>'+no+'</span><span>'+ sex + '</span>';
+      list += '<span style="width:6rem;display:inline-block;">'+name+'</span><span style="width:8rem;display:inline-block;">'+ruby+'</span>';
+      list += '<span>TEL:'+tel+'</span></div>';
     } 
     //console.log(list);
     $('#searchResult').html(list);
@@ -689,10 +692,12 @@ function validation(reg,input,cautionText) {
 
 //オブジェクトのソート
 function sort(arr,key) {//obj: 対象オブジェクト配列, count: ソートプロパティ
-  arr.sort(function(a, b) {
-        return (a.key > b.key) ? -1 : 1;
-    });
-}
+    arr.sort(function(a, b) {
+      console.log(a,b);
+          return (a[key] > b[key]) ? 1 : -1;
+      });
+    return arr;
+  }
 
 //重複削除
 function unique(array) {

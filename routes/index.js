@@ -101,7 +101,7 @@ router.get('/:id(\\d+)', function(req, res) {
 		});
 
 	//カードページにリダイレクト
-	//res.redirect('/card' + req.query.no);
+	res.redirect('/');
 })
 
 //NO検索
