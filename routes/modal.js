@@ -121,10 +121,11 @@ exports.analytics = function (req) {
 		html += '<li id="visitLanking">来店数</li>';
 		html += '<li id="nomineeCount">指名数</li>';
 		html += '<li id="local">地域別</li>';//地図で色分け
-		html += '<li id="generation">年齢別</li>';//年齢分布
+		html += '<li id="generation">年齢層</li>';//年齢分布
 		html += '<li id="relation">関係性</li>';
 		html += '</ul>';
 		html += '<input type="range" id="magnification" name="magnification" step="1" min="1" max="30" value="15">';
+		html += '<input type="range" id="magnificationGeneration" name="magnificationGeneration" step="1" min="1" max="30" value="15">';
 		//解析対象　来店頻度と年齢分布、　mongodb 
 		html += '<div id="visual"></div>'
 		html += '<span id="cancel">&times;</span>';

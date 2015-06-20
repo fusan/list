@@ -1,2 +1,2 @@
-# member_list
+# member
 名簿アプリ

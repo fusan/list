@@ -46,7 +46,13 @@ router.get('/register', function(req, res) {
 		nextNo = initialNum + memberCount +1;
 		html = modal.register('新規登録','',nextNo);
 
-		res.send({title: '新規登録',customer: '',nextNo: nextNo, html: html});
+		var data = {};
+		data.title = '新規登録';
+		data.customer = '';
+		data.nextNo = nextNo;
+		data.html = html
+
+		res.send(data);
 	});
 });
 
@@ -65,10 +71,12 @@ router.post('/signUpCheck', function(req, res) {
 		birthday: req.body.birthday,
 		eMail: req.body.eMail
 	};
+
 	var data = {};
 	data.no = customer.no;
 	data.html = modal.signUpCheck(customer);
 	console.log(customer.sex);
+
 	res.send(data);
 });
 
@@ -240,7 +248,19 @@ router.post('/appendIMG', function(req, res) {
 
 	//画像データをデータベースに格納
 	var promise = new Promise(function(resolve, reject) {
-		update.IMG(req);  //Img modelにデータを挿入
+		update.IMG(req); //Img modelにデータを挿入
+		/*
+		Img.find({'会員番号': no}, function(err, data) {
+			//console.log(data);
+			var now = new Date().getDay();
+			var last = data.length;
+			var lastPushDay = data[last]['保存日'];
+			//console.log(lastPushDay);
+
+			lastPushDay = lastPushDay.getDay();
+			console.log('格納日'　+lastPushDay,'現在時刻'+now);
+			if(lastPushDay == now) resolve('ok');
+		});*/
 		resolve('ok');
 	});
 	
@@ -450,6 +470,36 @@ router.get('/nomineeCount', function(req,res) {
 	});
 })
 
+router.get('/generation', function(req,res) {
+	User.find({}, function(err, data) {
+		if(err) throw err;
+		
+		
+		Log.where('会員番号').equals('102').exec(function(err, data2) {
+			
+			var time = data2.length-1;
+			var firstVisit = data2[0]['来店日'];
+			var lastVisit = data2[time]['来店日'];
+			//console.log(time,firstVisit,lastVisit);
+			
+			//来店時の年齢　来店日 - 誕生日　時代ごとの顧客層の変化を取る
+			var firstVisitAge = getAge(data[0]['生年月日'],firstVisit);
+
+			//現在年齢　現在　- 誕生日　現在の利用層を取る
+			var attainedAge = getAge(data[0]['生年月日'],lastVisit);
+
+			console.log(firstVisitAge, attainedAge);
+		});
+
+		/*Logモデルから利用日付を抽出してその日の利用実績、顧客遷移を確認できる
+		Log.where('来店日').equals(ISODate("2015-05-11T14:49:30.951Z")).exec(function(err, data) {
+			console.log(data);
+		});*/
+
+		res.send(data);
+	});
+});
+
 /*
 router.get('/updateLog', function(req,res) {
 	//console.log(User);
@@ -460,6 +510,21 @@ router.get('/updateLog', function(req,res) {
 	});
 	res.send('時間変更しました。');
 });*/
+
+//年齢計算
+  function getAge (birthday, now) {
+    var b = new Date(birthday.getTime());
+    var n = new Date(now.getTime());
+    return (n-b)/ (365 * 24 * 60 * 60 *1000) - (n >= b ? 0: 1);
+  }
+
+//オブジェクトのソート
+function sort(arr,key) {//obj: 対象オブジェクト配列, count: ソートプロパティ
+    arr.sort(function(a, b) {
+      console.log(a,b);
+          return (a[key] > b[key]) ? 1 : -1;
+      });
+}
 
 //mongodb find 部分一致 http://stackoverflow.com/questions/3305561/how-to-query-mongodb-with-like
 module.exports = router;

@@ -1,37 +1,97 @@
 $(function() {
-  //参考　重複チェック　http://lealog.hateblo.jp/entry/2012/07/07/155004
+//参考　重複チェック　http://lealog.hateblo.jp/entry/2012/07/07/155004
 
-  //分析 
-  var chart = $('#analytics').attr('src', '/images/chart.svg');
+/*外部データ読み込み
+  $('#inport').on('click', function() {
+    console.log('click');
+
+    var list = $.ajax({
+      url: '/inport',
+      type: 'GET'
+    });
+
+    list.done(function(data) {
+      //var name = data['氏名'];
+      alert('データベスに挿入完了');
+      //console.log(data);
+    });
+
+  });*/
+
+function id(selector) {
+  return document.getElementById(selector);
+}
+
+/* 検索系　*/
+  //No.検索
+ id('searchNo').addEventListener('click', searchNo, false);
+
+  function searchNo() {
+    var no =id('NoNum').value;
+    no = toInt(no);
+
+    isNaN(no) ? alert('未登録です。') : window.open('/card' + no);
+  }
+
+  //名前検索
+ id('nameText').addEventListener('keyup', searchName, false);
+
+  function searchName() {
+    var ruby =id('nameText').value;
+
+    var search = $.ajax({
+        url: '/search',
+        type: 'GET',
+        data: {
+          ruby: ruby
+        }
+      });
+
+    search.done(function(data) {
+        memberList(data,'.list');
+      });
+
+    search.fail(function(err) {
+        console.log(err);
+      });
+  }
+
+/* 分析系 */
+var chart = $('#analytics').attr('src', '/images/chart.svg');
   chart.css({
     float: 'right',
     margin: '0 .5rem 0 0'
   })
  
   //分析モーダルウィンドウ
-  $('#analytics').on('click', function() {
+ id('analytics').addEventListener('click', modalSlideUp,false);
+
+  function modalSlideUp() {
     $('#registerWindow').animate({
             position: 'absolute',
             top: 0,
-            height: $(window).height()
+            height: window.innerHeight
         },500,'easeOutQuart');
     
-    var analytics = $.ajax({
-        url: '/analytics',
-        type: 'GET'
-    });
+      var analytics = $.ajax({
+          url: '/analytics',
+          type: 'GET'
+        });
 
     analytics.done(function(data) {
         //d3.jsでデータをオブジェクトを取得
-        $('#registerWindowInner').html(data);
+       id('registerWindowInner').innerHTML = data;
 
-        $('#visitLanking').on('click', visitRnaking);
-        $('#magnification').on('change', visitRnaking);//magnification display none -> block
-        $('#nomineeCount').on('click', nomineeCount);
+       id('visitLanking').addEventListener('click',visitRnaking ,false);
+       id('nomineeCount').addEventListener('click', nomineeCount ,false);
+       id('generation').addEventListener('click', generation ,false);
 
-        cancel();
-    });
-  });
+       id('magnification').addEventListener('change', visitRnaking ,false);//magnification display none -> block
+       id('magnificationGeneration').addEventListener('change', generation ,false);//magnification display none -> block
+
+       id('cancel').addEventListener('click', cancel, false);
+      });
+  }
 
 //来店ランキング
 function visitRnaking() {
@@ -56,12 +116,13 @@ function visitRnaking() {
       $('#magnification').css({display: 'none'});
     });
 
-    $('#analyticsExplain').html('来店の説明文');
+    id('analyticsExplain').innerHTML = '来店の説明文';
 
     barChart('#visual',ranks);
   });
 }
 
+//指名ランキング
 function nomineeCount() {
   
     var nomineeCount = $.ajax({
@@ -70,7 +131,7 @@ function nomineeCount() {
     });
 
     nomineeCount.done(function(data) {
-      console.log(data);
+      //console.log(data);
       var nomineeAll = []; //指名リスト
       var nominator = []; //指名者リストnominator
       var nomineeRanking = [];　//指名者と指名数のオブジェクト配列
@@ -80,7 +141,7 @@ function nomineeCount() {
       }
 
       var staffs = unique(nomineeAll);
-      console.log(staffs);
+      //console.log(staffs);
 
       for(var i=0,n=staffs.length;i<n;i++) {
         var staff = {};
@@ -94,16 +155,174 @@ function nomineeCount() {
         nomineeRanking.push(staff);
       }
 
-      $('#analyticsExplain').html('指名数の説明文');
+      id('analyticsExplain').innerHTML = '来店の説明文';
 
       pieChart('#visual',nomineeRanking);
       //barChart('#visual',nomineeRanking);     
     });
 }
 
+//世代別分布
+function generation() {
+  var generation = $.ajax({
+    url: '/generation',
+    type: 'GET'
+  });
+
+  generation.done(function(data) {
+    //console.log(data);
+    console.log(new Date(0));
+
+    var generations = [];
+
+    for(var i=0,n= data.length;i<n;i++) {
+      var generationObj = {};
+      var age = getAge(new Date(data[i]['生年月日'] || new Date()), new Date(data[i]['来店日']));
+        age = Math.floor(age);
+        age < 0 ? age = 0 : age = age;
+
+      //generationObj.firstVisit = data[i]['来店日'];
+      //generationObj.birthday =  data[i]['生年月日'];
+      //generationObj.name = data[i]['氏名'];
+      generationObj.ageAtFirstVisit = age;
+
+      generations.push(generationObj);
+    }
+
+    
+    $('#magnificationGeneration').css({display: 'block'});
+    $('#magnificationGeneration').siblings().on('click', function() {
+      $('#magnificationGeneration').css({display: 'none'});
+    });
+
+    histogramChart('#visual',generations);
+
+    id('analyticsExplain').innerHTML = '<年齢層の分布><br>来店人のデータです。現在年齢と来店履歴からの来店構成を見ていく予定。';
+
+  });
+}
+
+//histogram chrat
+function histogramChart(DOM, obj) {
+  console.log(obj);
+  var graphArea = $(DOM);
+  var dataSet = [];
+  var barWidth = 20;
+  var svgHieght =  $(DOM).height();
+  var ageArray = [10,20,30,40,50,60,70,80,90];
+  var magnification =  id('magnificationGeneration').value; //$('#magnification').val();
+
+  for(var i=0,n=obj.length;i<n;i++) {
+    dataSet.push(obj[i].ageAtFirstVisit);
+  }
+  console.log(dataSet);
+  graphArea.children().remove();
+
+  var histogram = d3.layout.histogram()
+    .range([10, 90])
+    .bins(ageArray)
+
+  var maxValue = d3.max(histogram(dataSet), function(d, i) {
+        //console.log(d);
+        return d.y;
+      })
+
+  console.log(maxValue,svgHieght);
+
+  var Yscale = d3.scale.linear()
+    .domain([0, maxValue])
+    .range([maxValue, 0])
+
+  var Histogram = d3.select(DOM)
+    .append('svg')
+    .attr({
+      id: 'histogramchart',
+      height: graphArea.height(),
+      width: graphArea.width()
+    })
+
+  var color = d3.scale.category20();
+
+  Histogram.selectAll('rect')
+        .data(histogram(dataSet))
+        .enter()
+        .append('rect')
+        .attr({
+          class: 'bar',
+          x: function(d ,i) {
+            return i * barWidth *1.5;
+          },
+          y: svgHieght,
+          width: barWidth,
+          height: 0,
+          fill: function(d,i) {
+            return color(i);
+          },
+          transform: 'translate('+ barWidth +', ' + (-svgHieght * .1 )+ ')'
+        })
+        .transition()
+        .duration(400)
+        .ease('bounce')
+        .attr({
+          y: function(d, i) {
+            //console.log(d.y);
+            return svgHieght - d.y * magnification;
+          },
+          width: barWidth,
+          height: function(d, i) {
+            return d.y * magnification;
+          }
+        })
+
+    Histogram
+
+    Histogram.selectAll('text')
+    .data(histogram(dataSet))
+    .enter()
+    .append('text')
+    .attr({
+      x:function(d, i) {
+        return i * barWidth *1.5;
+      },
+      y: svgHieght,
+      width: barWidth,
+      'text-anchor': 'middle',
+      transform: 'translate('+ barWidth * 1.5 +', ' + (-svgHieght * .1 )+ ')'
+    })
+    .text(function(d) {
+      console.log(d);
+      return d.y;
+    })
+    .attr({
+      fill: 'white'
+    })
+
+    Histogram.selectAll('text2')
+    .data(histogram(dataSet))
+    .enter()
+    .append('text')
+    .attr({
+      x:function(d, i) {
+        return i * barWidth *1.5;
+      },
+      y: svgHieght,
+      width: barWidth,
+      'font-size': '.5rem',
+      'text-anchor': 'middle',
+      transform: 'translate('+ barWidth * 1.5 +','+ (-20) +')'
+    })
+    .text(function(d, i) {
+      console.log(ageArray[i]);
+      return ageArray[i];
+    })
+    .attr({
+      fill: 'gray'
+    })
+  }
+
 //pie chart 
 function pieChart(DOM, obj) {
-  var graphArea = $(DOM)
+  var graphArea = $(DOM);
   var textPositions = [];
   var nums = [];
   var names = [];
@@ -129,6 +348,7 @@ function pieChart(DOM, obj) {
   var Pie = d3.select(DOM)
     .append('svg')
     .attr({
+      id: 'piechart',
       height: graphArea.height(),
       width: graphArea.width(),
     })
@@ -228,7 +448,7 @@ function barChart(DOM,obj) {//DOM : jQueryObj
   var positionArr = [];
   var nums = [];
   var names = [];
-  var magnification = $('#magnification').val();
+  var magnification =  id('magnification').value; //$('#magnification').val();
 
   for(var key in obj) {
         var num = obj[key].count;
@@ -246,6 +466,7 @@ function barChart(DOM,obj) {//DOM : jQueryObj
   var Bar = d3.select(DOM)
               .append('svg')
               .attr({
+                id: 'barChart',
                 height: $(DOM).height(),
                 width: $(DOM).width()
               })
@@ -333,9 +554,12 @@ function barChart(DOM,obj) {//DOM : jQueryObj
     })
 }
 
+/* 登録系　*/
 //新規登録
-$('#register').on('click', function() {
-    $('#registerWindow').animate({
+id('register').addEventListener('click', register, false);
+
+function register() {
+  $('#registerWindow').animate({
         position: 'absolute',
         top: 0,
         height: $(window).height()
@@ -361,8 +585,10 @@ $('#register').on('click', function() {
       validation(regTel,$('input[name="tel"]'),'半角で-をいれてね');
       validation(regMail,$('input[name="eMail"]'),'正しくありません');
 
-      signUpCheck(); //確認画面へ
-      cancel(); //キャンセル
+      id('signUpCheck').addEventListener('click', signUpCheck, false);
+      id('cancel').addEventListener('click', cancel, false);
+      //signUpCheck(); //確認画面へ
+      //cancel(); //キャンセル
 
       //郵便番号入力アシストAOI
       $('input[name="postcode"]').on('keyup', function() {
@@ -370,14 +596,12 @@ $('#register').on('click', function() {
     });
   });   
 		//window.open('/register');
-});
+}
 
 //登録確認画面
 function signUpCheck() {
-  $('#signUpCheck').on('click', function() {
-    //console.log($('input[name="sex"]').prop('checked'));
 
-    var signUpCheck = $.ajax({
+  var signUpCheck = $.ajax({
       url: '/signUpCheck',
       type: 'POST',
       data: {
@@ -393,19 +617,20 @@ function signUpCheck() {
       }
   });
 
-    signUpCheck.done(function(data) {
+  signUpCheck.done(function(data) {
 
       var no = data.no,
         html =  data.html;
         //console.log(html);
-      $('#registerWindowInner').html(html);
+      id('registerWindowInner').innerHTML = html;
+      //$('#registerWindowInner').html(html);
+      DBinsert(no); // < - リファクタリング要　
+      //id('create').addEventListener('click', ,false); 引数を与えることができるかがp
 
-      DBinsert(no);
-
-      cancel();
+      id('cancel').addEventListener('click', cancel, false);
+      //cancel();
     });
-  });
-}
+  }
 
   //本登録処理　-> DBへ
   function DBinsert(no) {
@@ -441,39 +666,30 @@ function signUpCheck() {
   });
 }
 
-  //モーダルウィンドウキャンセル処理
-  function cancel() {
-    $('#cancel').on('click', function() {
-        $('#registerWindow').animate({
-            top: '100%',
-            height: 0
-        });
-        $('#registerWindowInner').empty();
-    });
-  }
-  
-	$('#slider').on('change', function() {
-		console.log($(this).val());
-	})
+//モーダルウィンドウキャンセル処理
+function cancel() {
+    $('#registerWindow').animate({
+        top: '100%',
+        height: 0
+      });
 
-	//全会員情報取得
-	var allList = $.ajax({
-			url: '/allList',
-			type: 'GET'
-		});
+    $('#registerWindowInner').empty();
+}
 
-	allList.done(function(data) {
-			memberList(data,'.list');
-		});
+$('#slider').on('change', function() {
+    console.log($(this).val());
+  })
 
-	//設定画面
-  var control = $('#control').attr('src','/images/control.svg');
-  var panel = $('#controlPanel');
+//設定画面
+var control = $('#control').attr('src','/images/control.svg');
+var panel = $('#controlPanel');
+
   control.css({
       float: 'right'
   });
 
   panel.css({
+      display: 'block',
       position: 'absolute',
       top: -98,
       right:20
@@ -486,6 +702,7 @@ function signUpCheck() {
 
           if(parseInt(panel.css('top')) == -98) {
               $(this).css({
+                opacity: 0,
                 '-webkit-transform': 'rotate(90deg)',
                 '-webkit-transition': 'all .5s cubic-bezier(0.215, -0.400, 0.685, 1.530) 0 '
               });
@@ -514,13 +731,24 @@ function signUpCheck() {
       }
   });
 
-  //天気予報
-  var weather = $.ajax({
+/* ロード時　*/
+//全会員情報取得
+var allList = $.ajax({
+      url: '/allList',
+      type: 'GET'
+    });
+
+allList.done(function(data) {
+      memberList(data,'.list');
+    });
+
+//天気予報
+var weather = $.ajax({
         url: 'http://api.openweathermap.org/data/2.5/weather?q=Tokyo,jp',
         type: 'get'
       });
 
-  weather.done(function(data) {
+weather.done(function(data) {
     //console.log(data);
     var img = $('<img>').attr('src','http://openweathermap.org/img/w/'+ data.weather[0].icon+'.png' );
           /*img.css({
@@ -530,15 +758,15 @@ function signUpCheck() {
           })*/
         //console.log(img);
     $('#weather').html(img);
-  });
+});
 
-  //誕生日リスト
-  var birthday = $.ajax({
+//誕生日リスト
+var birthday = $.ajax({
       url: '/birthday',
       typ: 'GET'
     });
 
-  birthday.done(function(data) {
+birthday.done(function(data) {
     //console.log(new Date(data[0].birthday).getMonth());
     var lucker = $('<ul>').attr('class', 'lucker');
     var list = [];
@@ -547,61 +775,11 @@ function signUpCheck() {
             lucker.append(li);
         }
     $('#birthday').append(lucker);
-  });
+});
 	
-	//No.検索
-	$('#searchNo').on('click', function() { //#NoNum => change event 
-		var no = document.getElementById('NoNum').value;
-		no = toInt(no);
-
-		isNaN(no) ? alert('未登録です。') : window.open('/card' + no);
-    //console.log('会員番号でサーチ: ' + no);
-	});
-
-	//名前検索
-	$('#nameText').on('keyup', function() {　//#nameText => change event 
-		var ruby = document.getElementById('nameText').value;
-		console.log('会員名でサーチ: ' + ruby);
-
-		//if(ruby == '') {
-		//	alert('入力してください。');
-		//} else {
-			var search = $.ajax({
-				url: '/search',
-				type: 'GET',
-				data: {
-					ruby: ruby
-				}
-			});
-
-			search.done(function(data) {
-				memberList(data,'.list');
-			});
-
-			search.fail(function(err) {
-				console.log(err);
-			});
-		//}
-	});
-
-	/*外部データ読み込み
-	$('#inport').on('click', function() {
-		console.log('click');
-
-		var list = $.ajax({
-			url: '/inport',
-			type: 'GET'
-		});
-
-		list.done(function(data) {
-			//var name = data['氏名'];
-			alert('データベスに挿入完了');
-			//console.log(data);
-		});
-
-	});*/
-
-	function memberList(data,target) {
+	
+//会員リスト
+function memberList(data,target) {
 		var list = '';
     for(var i=0,n=data.length; i<n; i++) {
       var name = data[i]['氏名'], ruby = data[i]['ふりがな'], tel = data[i]['電話番号'], no = data[i]['会員番号'], sex = data[i]['性別'];
@@ -610,8 +788,9 @@ function signUpCheck() {
       list += '<span style="width:6rem;display:inline-block;">'+name+'</span><span style="width:8rem;display:inline-block;">'+ruby+'</span>';
       list += '<span>TEL:'+tel+'</span></div>';
     } 
-    //console.log(list);
-    $('#searchResult').html(list);
+    
+    id('searchResult').innerHTML = list;
+
     //検索結果にマウスエフェクト
     $(target).on({
         'mouseenter': function() {
@@ -638,12 +817,12 @@ function signUpCheck() {
     });
   }
 
-  //インプットルールチップ
+//インプットルールチップ
   tooltip('#NoNum', '半角');
   tooltip('#nameText', '全角ひらがな');
   tooltip('input[name="ruby"]', '全角');
 
-  function tooltip(selecter, text) { //selecter : #Num .Class
+function tooltip(selecter, text) { //selecter : #Num .Class
     $(selecter).on({
         'change':function () {
             var str = $(this).val();
@@ -699,29 +878,37 @@ function sort(arr,key) {//obj: 対象オブジェクト配列, count: ソート�
     return arr;
   }
 
+ //年齢計算
+function getAge (birthday, now) {
+    var b = new Date(birthday.getTime());
+    var n = new Date(now.getTime());
+    return (n-b)/ (365 * 24 * 60 * 60 *1000) - (n >= b ? 0: 1);
+  }
+
 //重複削除
 function unique(array) {
 　var storage = {};
 　var uniqueArray = [];
 　var i,value;
-　for ( i=0; i<array.length; i++) {
+
+　for( i=0; i<array.length; i++) {
    　value = array[i];
       if (!(value in storage)) {
       　storage[value] = true;
          uniqueArray.push(value);
        }
    }
-   return uniqueArray;
+  return uniqueArray;
 }
 
 //全角数字を半角文字に変換
-  function toInt(str) {
-        str = str.replace(/[０-９．]/g, function (s) {
-                    return String.fromCharCode(s.charCodeAt(0) - 65248);
-                })
-                .replace(/[‐－―ー]/g, '-')
-                .replace(/[^\-\d\.]/g, '')
-                .replace(/(?!^\-)[^\d\.]/g, '');
-        return parseInt(str, 10);
+function toInt(str) {
+    str = str.replace(/[０-９．]/g, function (s) {
+            return String.fromCharCode(s.charCodeAt(0) - 65248);
+        })
+        .replace(/[‐－―ー]/g, '-')
+        .replace(/[^\-\d\.]/g, '')
+        .replace(/(?!^\-)[^\d\.]/g, '');
+  return parseInt(str, 10);
   }
 });
