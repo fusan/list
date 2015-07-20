@@ -2,10 +2,10 @@
 $(function() {
 	//参考　Fielapi 参考http://www.hcn.zaq.ne.jp/___/WEB/File_API-ja.html, https://app.codegrid.net/entry/file-api-filereader-api
 	var inputFile = document.getElementById('file');
-	console.log('引き渡しデータ' + no);
+	console.log('引き渡しデータ', no);
 
 	//来店履歴追記
-	$('#newKarte').on('click', function() {
+	document.getElementById('newKarte').addEventListener('click', function() {
 		var appendKarte = $.ajax({
 			url: '/appendKarte',
 			type: 'GET',
@@ -16,32 +16,34 @@ $(function() {
 
 		//更新情報フォーム生成
 		appendKarte.done(function(data) {
-			console.log('レスポンスデータ')
-			console.log(data);
+			console.log('レスポンスデータ', data);
 			
 			$('#modal').fadeIn();
 			$('#modalInner').append(data);
 
 			//キャンセル
-			$('#cancel').on('click', function(e) {
+			document.getElementById('cancel').addEventListener('click', function(e) {
 				e.preventDefault();
 				$('#modal').fadeOut();
 				$('#modalInner').children().remove();
-			});
+			},false);
 
 			//追記情報格納
-			$('#save').on('click', function(e) {
+			document.getElementById('save').addEventListener('click', function(e) {
 				console.log('click');
 				//e.preventDefault();
 				$('#modal').fadeOut();
 				$('#modalInner').children().remove();
-			});
+			},false);
 		});
-	});
+	},false);
 
-	//画像取り込み 
+	//画像取り込み
+
 	var reader = new FileReader();
-	var imgURL;
+
+	inputFile.addEventListener('change', fileChange, false);
+	reader.addEventListener('load', fileLoad, false);
 	 
 	function fileChange(ev) {
 	  var target = ev.target;
@@ -49,22 +51,19 @@ $(function() {
 	  var type = file.type;
 	  var size = file.size / 1024;
 
-	  imgURL = file.name;
-	  console.log(parseInt(size) + 'KB');
+	  console.log('ファイル容量',parseInt(size) + 'KB');
 	  
 	  if ( type == 'image/*' && size < 100) {
 	    alert('選択できるファイルはJPEG画像だけです。');
 	    inputFile.value = '';
 	    return;
 	  }
+
 	  reader.readAsDataURL(file);
 	}
 	 
 	function fileLoad() {
-		//クライアントで即時表示
-		//var img = '<img src="'+reader.result+'">';
-		//$('#kartes').html(img);
-		console.log(imgURL);
+
 		console.log(reader);
 		
 		var appendIMG = $.ajax({
@@ -76,14 +75,8 @@ $(function() {
 		});
 		
 		appendIMG.done(function(data) {
-			
-			console.log(data);
+			//console.log('画像データ',data);
 			$('#kartes').html(data);
-		})
-		
+		});	
 	}
-	 
-	inputFile.addEventListener('change', fileChange, false);
-	reader.addEventListener('load', fileLoad, false);
-
 });

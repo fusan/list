@@ -61,12 +61,14 @@ var chart = $('#analytics').attr('src', '/images/chart.svg');
   chart.css({
     float: 'right',
     margin: '0 .5rem 0 0'
-  })
+  });
+
+  console.log('style',id('analytics').style);
  
   //分析モーダルウィンドウ
  id('analytics').addEventListener('click', modalSlideUp,false);
 
-  function modalSlideUp() {
+ function modalSlideUp() {
     $('#registerWindow').animate({
             position: 'absolute',
             top: 0,
@@ -313,7 +315,7 @@ function histogramChart(DOM, obj) {
     })
     .text(function(d, i) {
       console.log(ageArray[i]);
-      return ageArray[i];
+      return ageArray[i] + '代';
     })
     .attr({
       fill: 'gray'

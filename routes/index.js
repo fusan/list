@@ -3,14 +3,17 @@ var router = express.Router();
 var fs = require('fs');
 var Promise = require('es6-promise').Promise;
 
-var model = require('../model.js');
+var model = require('../model');
 	User = model.User;
 	Log = model.Log;
 	Img = model.Img;
 	Memo = model.Memo;
 
-var modal = require('./modal.js');
-var update = require('./update.js');
+var modal = require('./modal');
+var update = require('./update');
+
+var validator = require('validator');
+console.log(validator);
 
 var week = ['日','月','火','水','木','金','土'];
 
